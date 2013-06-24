@@ -4,5 +4,4 @@
 #
 set -e
 
-# use -iru to search directories ack usually ignores (like .git)
-ack -i $1
+rak -i $1 # gem install rak
