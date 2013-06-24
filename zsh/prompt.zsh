@@ -2,6 +2,9 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
+# git-prompt.zsh
+# http://git.kernel.org/cgit/git/git.git/plain/contrib/completion/git-prompt.sh
+
 if (( $+commands[git] ))
 then
   git="$commands[git]"
@@ -47,47 +50,20 @@ need_push () {
   fi
 }
 
-rb_prompt(){
-  if (( $+commands[rbenv] ))
-  then
-    version=$(rbenv version-name 2> /dev/null)
-    if [[ "$version" == "" ]] then version="-" fi
-
-    echo "%{$fg_bold[yellow]%}$version%{$reset_color%}"
-  else
-    echo ""
-  fi
-}
-
-# This keeps the number of todos always available the right hand side of my
-# command line. I filter it to only count those tagged as "+next", so it's more
-# of a motivation to clear out the list.
-todo(){
-  if (( $+commands[todo.sh] ))
-  then
-    num=$(echo $(todo.sh ls +next | wc -l))
-    let todos=num-2
-    if [ $todos != 0 ]
-    then
-      echo "$todos"
-    else
-      echo ""
-    fi
-  else
-    echo ""
-  fi
-}
-
 directory_name(){
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt) in $(directory_name) $(git_dirty)$(need_push)\n› '
-set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
+prompt_prefix(){
+  echo "%{$fg_bold[green]%}~>%{$reset_color%}"
 }
 
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+#export PROMPT=$'\n$(prompt_prefix) $(directory_name) $(git_dirty)$(need_push)\n› '
+export PROMPT=$'\n$(prompt_prefix) $(directory_name) $(__git_ps1 "(%s)")\n› '
+
 precmd() {
-  title "zsh" "%m" "%55<...<%~"
-  set_prompt
+  # tmux already sets the title pretty nice
+  #title "zsh" "%m" "%55<...<%~"
 }
