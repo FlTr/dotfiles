@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SESSION="std"
+tmux has-session -t $SESSION &> /dev/null
+
+if [ $? != 0 ] 
+ then
+    tmux new-session -d -s $SESSION
+
+    tmux new-window -t $SESSION:1
+    tmux split-window -h -t $SESSION:1
+    tmux select-pane -t $SESSION:1.0
+
+    tmux select-window -t $SESSION:0
+    tmux split-window -h -t $SESSION:0
+    tmux split-window -v -t $SESSION:0
+    tmux select-pane -t $SESSION:0.0
+fi
+
+tmux attach -t $SESSION
