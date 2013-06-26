@@ -2,7 +2,7 @@
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' completer _complete _correct _approximate
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

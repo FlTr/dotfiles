@@ -61,7 +61,7 @@ prompt_prefix(){
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
 #export PROMPT=$'\n$(prompt_prefix) $(directory_name) $(git_dirty)$(need_push)\n› '
-export PROMPT=$'\n$(prompt_prefix) $(directory_name) $(__git_ps1 "(%s)")\n› '
+export PROMPT=$'$(prompt_prefix) $(directory_name) $(__git_ps1 "(%s)")\n› '
 
 precmd() {
   # tmux already sets the title pretty nice
