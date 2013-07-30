@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+# http://github.com/alols/xcape
+if (( $+commands[xcape] ))
+then
+    # make Caps_Lock act as:
+    #   Escape if pressed standalone
+    #   Control_L if pressed with another key
+    xmodmap -e 'clear Lock'
+    xmodmap -e 'keycode 66 = Control_L' -e 'add Control = Control_L Control_R'
+
+    # TODO: xcape fails with #39=s;#46=l
+    # make s and l act as AltGr (ISO_Level3_Shift) if pressed with another key
+    # xmodmap -e 'keycode 39 = ISO_Level3_Shift' # s
+    # xmodmap -e 'keycode 46 = ISO_Level3_Shift' # l
+
+    killall xcape > /dev/null 2>&1 # restart if already running
+    xcape -e '#66=Escape' #;#39=s;#46=l'
+else
+    # make Caps_Lock act as Escape
+    xmodmap -e 'clear Lock' -e 'keycode 66 = Escape'
+fi
