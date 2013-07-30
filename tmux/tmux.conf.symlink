@@ -24,6 +24,12 @@ bind _ splitw
 bind-key -n C-right next
 bind-key -n C-left prev
 
+# ctrl + h/j/k/l: selecting pane
+bind-key C-h select-pane -L
+bind-key C-j select-pane -D
+bind-key C-k select-pane -U
+bind-key C-l select-pane -R
+
 # vi-style controls for copy mode
 setw -g mode-keys vi
 unbind [
