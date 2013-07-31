@@ -4,4 +4,4 @@
 #
 set -e
 
-rak -i $1 # gem install rak
+rak -i -a $1 # gem install rak
