@@ -4,6 +4,8 @@ else
   export PS1='%3~$(git_info_for_prompt)%# '
 fi
 
+typeset -u path # unique path values
+
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
