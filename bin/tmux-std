@@ -13,7 +13,7 @@ if [ $? != 0 ]
 
     tmux select-window -t $SESSION:0
     tmux split-window -h -t $SESSION:0
-    tmux split-window -v -t $SESSION:0
+#    tmux split-window -v -t $SESSION:0
     tmux select-pane -t $SESSION:0.0
 fi
 
