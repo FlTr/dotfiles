@@ -44,6 +44,7 @@ zle -N newtab
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[H' beginning-of-line
+bindkey '^[[4~' end-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
