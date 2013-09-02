@@ -44,9 +44,9 @@ bind -t vi-copy 'v' begin-selection
 bind -t vi-copy 'y' copy-selection
 
 # copy tmux buffer to clipboard
-bind C-y run "tmux show-buffer | xsel -b"
+bind C-y run "tmux show-buffer | xsel -ib"
 # move x clipboard into tmux paste buffer
-bind C-p run "tmux set-buffer \"$(xsel -o)\"; tmux paste-buffer"
+bind C-p run "tmux set-buffer \"$(xsel -ob)\"; tmux paste-buffer"
 
 # border color
 set -g pane-border-fg white
@@ -86,7 +86,7 @@ set -g status-justify centre # center align window list
 set -g base-index 0
 
 # mouse stuff
-#setw -g mode-mouse on # doesn't work with terminology
+setw -g mode-mouse off # don't like it
 set -g mouse-select-pane on
 setw -g mouse-select-window on
 
