@@ -47,5 +47,6 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
+bindkey '^[[P' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
