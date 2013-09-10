@@ -83,7 +83,7 @@ set -g status-right '#[fg=green](#[default]%H:%M#[fg=green])(#[default]%d.%m.%y#
 set -g status-justify centre # center align window list
 
 # Start window indexing at one instead of zero
-set -g base-index 0
+set -g base-index 1
 
 # mouse stuff
 setw -g mode-mouse off # don't like it
