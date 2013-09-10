@@ -85,9 +85,9 @@ set -g status-justify centre # center align window list
 # Start window indexing at one instead of zero
 set -g base-index 1
 
-# mouse stuff
-setw -g mode-mouse off # don't like it
-set -g mouse-select-pane on
-setw -g mouse-select-window on
+# mouse stuff, keep all off to keep usual features like scrolling in less, copy and paste
+setw -g mode-mouse off
+set -g mouse-select-pane off
+setw -g mouse-select-window off
 
 set -s escape-time 0
