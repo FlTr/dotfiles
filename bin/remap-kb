@@ -1,23 +1,19 @@
 #!/bin/zsh
 
+# Caps_Lock -> Control_L:
+xmodmap -e 'clear Lock'
+xmodmap -e 'keysym Caps_Lock = Control_L' -e 'add Control = Control_L'
+
+# ö -> [ # Shift+ö -> { # AltGr+ö -> ö # Shift+AltGr+ö -> Ö
+xmodmap -e 'keysym odiaeresis = bracketleft braceleft bracketleft braceleft odiaeresis Odiaeresis odiaeresis'
+
+# ä -> ] # Shift+ä -> ] # AltGr+ä -> ä # Shift+AltGr+ä -> Ä
+xmodmap -e 'keysym adiaeresis = bracketright braceright bracketright braceright adiaeresis Adiaeresis adiaeresis'
+
 # http://github.com/alols/xcape
 if (( $+commands[xcape] ))
 then
-    # make Caps_Lock act as:
-    #   Escape if pressed standalone
-    #   Control_L if pressed with another key
-    xmodmap -e 'clear Lock'
-    xmodmap -e 'keysym Caps_Lock = Control_L' -e 'add Control = Control_L'
-
-    # TODO: xcape fails with #39=s;#46=l
-    # make s and l act as AltGr (ISO_Level3_Shift) if pressed with another key
-    # xmodmap -e 'keycode 39 = ISO_Level3_Shift' # s
-    # xmodmap -e 'keycode 46 = ISO_Level3_Shift' # l
-
+    # Control_L (Caps_Lock) -> Escape if pressed standalone
     killall xcape > /dev/null 2>&1 # restart if already running
     xcape -e 'Control_L=Escape' #;#39=s;#46=l'
-else
-    # make Caps_Lock act as Control_L
-    xmodmap -e 'clear Lock'
-    xmodmap -e 'keysym Caps_Lock = Control_L' -e 'add Control = Control_L'
 fi
