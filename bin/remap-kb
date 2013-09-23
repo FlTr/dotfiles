@@ -11,9 +11,6 @@ xmodmap -e 'keysym odiaeresis = bracketleft braceleft bracketleft braceleft odia
 xmodmap -e 'keysym adiaeresis = bracketright braceright bracketright braceright adiaeresis Adiaeresis adiaeresis'
 
 # http://github.com/alols/xcape
-if (( $+commands[xcape] ))
-then
-    # Control_L (Caps_Lock) -> Escape if pressed standalone
-    killall xcape > /dev/null 2>&1 # restart if already running
-    xcape -e 'Control_L=Escape' #;#39=s;#46=l'
-fi
+# Control_L (Caps_Lock) -> Escape if pressed standalone
+killall xcape > /dev/null 2>&1 # restart if already running
+$HOME/.dotfiles/bin/xcape -e 'Control_L=Escape'
