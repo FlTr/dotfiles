@@ -5,11 +5,4 @@
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
 
-# Update apt
-sudo apt-get update
-
-# Update packages
-sudo apt-get dist-upgrade
-
-# Clean packages
-sudo apt-get autoremove && sudo apt-get autoclean
+sudo pacman --sync --refresh --sysupgrade
