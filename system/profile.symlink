@@ -1,0 +1,21 @@
+# ~/.profile
+
+export EDITOR="vim"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+    export PATH
+fi
+
+# load .localprofile if it exists
+if [ -f "$HOME/.localprofile" ] ; then
+    . $HOME/.localprofile
+fi
+
+# vim: ft=sh
