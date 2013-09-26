@@ -8,14 +8,9 @@ set $down j
 set $up k
 set $right l
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+# default font: 
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Source Code Pro 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -25,13 +20,10 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+x kill
 
-# start dmenu (a program launcher)
+# start dmenu
 bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+$left focus left
@@ -57,18 +49,17 @@ bindsym $mod+Shift+Right move right
 
 mode "i3 > Layout" {
         # split in horizontal orientation
-        bindsym h split h
+        bindsym h split h; mode "default"
 
         # split in vertical orientation
-        bindsym v split v
+        bindsym v split v; mode "default"
 
         # enter fullscreen mode for the focused container
-        bindsym f fullscreen
+        bindsym f fullscreen; mode "default"
 
-        # change container layout (stacked, tabbed, toggle split)
-        bindsym s layout stacking
-        bindsym w layout tabbed
-        bindsym e layout toggle split
+        # change container layout (tabbed, toggle split)
+        bindsym t layout tabbed; mode "default"
+        bindsym s layout toggle split; mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -83,10 +74,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
