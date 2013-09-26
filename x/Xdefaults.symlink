@@ -2,3 +2,4 @@ URxvt.background: #000000
 URxvt.foreground: #E6E6E6
 URxvt.font: xft:DejaVu Sans Mono:size=10:antialias=true:dpi=96
 URxvt.scrollBar: false
+Xcursor.theme: Vanilla-DMZ
