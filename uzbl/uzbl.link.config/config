@@ -165,6 +165,7 @@ set ssl_verify = 1
 @ignore_key <Shift>
 @ignore_key <Multi_key>
 @ignore_key <Mod2>
+@ignore_key <Mod5>
 
 # --- Bind aliases -----------------------------------------------------------
 
@@ -463,6 +464,12 @@ set default_mode = command
 sync_spawn_exec @scripts_dir/load_cookies.sh
 sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
+# squid proxy
+# for proper https handling with parent proxy add to squid.conf
+# prefer_direct off
+# nonhierarchical_direct off
+
+set proxy_url = http://localhost:3128
 # Set the "home" page.
 set uri = uzbl.org/doesitwork/@COMMIT
 
