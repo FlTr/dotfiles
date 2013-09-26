@@ -1,6 +1,7 @@
 # ~/.profile
 
 export EDITOR="vim"
+export PAGER="less"
 export XDG_DOWNLOAD_DIR="$HOME/downloads"
 
 export LANG="en_US.UTF-8"
