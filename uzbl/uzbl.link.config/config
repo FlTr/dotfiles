@@ -313,6 +313,7 @@ set ebind     = @mode_bind global,-insert
 
 # Hard-bound bookmarks
 @cbind  gh  = uri http://www.uzbl.org
+@cbind  gb  = uri file://@config_home/uzbl/bookmarks.html
 
 # New window binds
 @cbind  gw  = event REQ_NEW_WINDOW
@@ -471,6 +472,6 @@ sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
 set proxy_url = http://localhost:3128
 # Set the "home" page.
-set uri = uzbl.org/doesitwork/@COMMIT
+set uri = file://@config_home/uzbl/bookmarks.html
 
 # vim: set fdm=syntax:
