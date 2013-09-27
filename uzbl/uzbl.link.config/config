@@ -360,8 +360,8 @@ set ebind     = @mode_bind global,-insert
 #set follow_hint_keys = thsnd-rcgmvwb/;789aefijkopquxyz234
 set follow_hint_keys = asdfghjklqwertzuiopyxcvbnm
 @cbind  fl*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'click') >\@
-@cbind  Fl*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'newwindow') >\@
-@cbind  fL*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'returnuri') >\@ set
+@cbind  fL*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'newwindow') >\@
+@cbind  Fl*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'returnuri') >\@ set
 @cbind  FL*  = spawn @scripts_dir/follow.sh \@< uzbl.follow("\@follow_hint_keys", "%s", 'returnuri') >\@ clipboard
 @cbind  fi   = spawn @scripts_dir/go_input.sh
 
@@ -469,8 +469,8 @@ sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 # for proper https handling with parent proxy add to squid.conf
 # prefer_direct off
 # nonhierarchical_direct off
-
 set proxy_url = http://localhost:3128
+
 # Set the "home" page.
 set uri = file://@config_home/uzbl/bookmarks.html
 
