@@ -465,10 +465,12 @@ set default_mode = command
 sync_spawn_exec @scripts_dir/load_cookies.sh
 sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
-# squid proxy
-# for proper https handling with parent proxy add to squid.conf
-# prefer_direct off
-# nonhierarchical_direct off
+# squid proxy:
+# - for proper https handling with parent proxy add to squid.conf
+#   prefer_direct off
+#   nonhierarchical_direct off
+# - don't forget to add your dns servers to squid.conf (otherwise slow response)
+#   dns_nameservers IP0 IP1
 set proxy_url = http://localhost:3128
 
 # Set the "home" page.
