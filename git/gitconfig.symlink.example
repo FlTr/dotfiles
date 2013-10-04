@@ -22,6 +22,8 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+        # 1 tab = 4 spaces when diffing
+        pager = less -x1,5
 [apply]
         whitespace = nowarn
 [mergetool]
