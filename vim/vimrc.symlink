@@ -58,7 +58,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -141,6 +141,9 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+
+" Visualize tabs and trailing whitespace
+set list listchars=tab:»·,trail:·
 
 " Enable modeline
 set modeline
