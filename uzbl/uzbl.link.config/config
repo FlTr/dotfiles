@@ -165,6 +165,7 @@ set ssl_verify = 1
 @ignore_key <Shift>
 @ignore_key <Multi_key>
 @ignore_key <Mod2>
+@ingore_key <Mod4>
 @ignore_key <Mod5>
 
 # --- Bind aliases -----------------------------------------------------------
@@ -242,6 +243,8 @@ set ebind     = @mode_bind global,-insert
 @cbind  <Page_Down>  = scroll vertical 100%
 @cbind  <Ctrl>f      = scroll vertical 100%
 @cbind  <Ctrl>b      = scroll vertical -100%
+@cbind  <Ctrl>u      = scroll vertial 50%
+@cbing  <Ctrl>d      = scroll vertical -50%
 @cbind  <<           = scroll vertical begin
 @cbind  >>           = scroll vertical end
 @cbind  <Home>       = scroll vertical begin
