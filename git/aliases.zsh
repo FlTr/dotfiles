@@ -7,6 +7,7 @@ then
 fi
 
 # The rest of my fun git aliases
+alias g=git
 alias ga='git add'
 alias gl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s -%Creset%C(yellow)%d %Creset%Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
@@ -23,6 +24,7 @@ alias gb='git branch'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 alias grm="git status | grep deleted | awk '{\$1=\$2=\"\"; print \$0}' | \
            sed 's/^[ \t]*//' | sed 's/ /\\\\ /g' | xargs git rm"
+alias gbak='git push --mirror backup'
 
 # git-svn aliases
 alias gsl='git svn rebase'
