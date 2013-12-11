@@ -7,14 +7,14 @@ URxvt*saveLines: 10000
 URxvt*transparent: true
 URxvt*shading: 50
 
-# urxvt extensions
+! urxvt extensions
 URxvt.perl-ext-common: keyboard-select,clipboard
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.clipboard.autocopy: true
 
 Xcursor.theme: Vanilla-DMZ
 
-# Source: http://bastian.rieck.ru/blog/posts/2013/making_urxvt_beautiful/
+! Source: http://bastian.rieck.ru/blog/posts/2013/making_urxvt_beautiful/
 *color0:  #2E3436
 *color1:  #a40000
 *color2:  #4E9A06
@@ -32,4 +32,4 @@ Xcursor.theme: Vanilla-DMZ
 *color14: #fcaf3e
 *color15: #EEEEEC
 
-# vim: ft=xdefaults
+! vim: ft=xdefaults
