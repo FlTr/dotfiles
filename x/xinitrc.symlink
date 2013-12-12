@@ -12,6 +12,12 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
   done
 fi
 
+# Source .xprofile when slim is used.
+if [ "`ps ax | grep /bin/slim | wc -l`" -gt 1 ] ; then
+  f="$HOME/.xprofile"
+  [ -f "$f" ] && . "$f"
+fi
+
 f="$HOME/.localxinitrc"
 [ -x "$f" ] && . "$f"
 
