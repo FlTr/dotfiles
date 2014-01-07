@@ -17,6 +17,7 @@ Bundle 'gmarik/vundle'
 
 " Custom bundles here:
 Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on
 
