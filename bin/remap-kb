@@ -12,5 +12,10 @@ xmodmap -e 'keysym adiaeresis = bracketright braceright bracketright braceright 
 
 # http://github.com/alols/xcape
 # Control_L (Caps_Lock) -> Escape if pressed standalone
-killall xcape > /dev/null 2>&1 # restart if already running
-$HOME/.dotfiles/bin/xcape -e 'Control_L=Escape'
+if [ `uname -m` =  "armv7l" ]; then
+    XCAPE=xcape.arm
+else
+    XCAPE=xcape
+fi
+killall $XCAPE > /dev/null 2>&1 # restart if already running
+$HOME/.dotfiles/bin/$XCAPE -e 'Control_L=Escape'
