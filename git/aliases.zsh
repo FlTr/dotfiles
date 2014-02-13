@@ -12,8 +12,8 @@ alias ga='git add'
 alias gl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s -%Creset%C(yellow)%d %Creset%Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gp='git push origin HEAD'
-alias gd='git diff'
-alias gds='git diff --staged'
+alias gd='git diff -M'
+alias gds='git diff -M --staged'
 alias gdt='git difftool --dir-diff' # --dir-diff needs git >= 1.7.11
 alias gc='git commit'
 alias gcv='git commit -v'
