@@ -9,15 +9,19 @@ set -e
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+  printf "  [ \033[00;34m .. \033[0m ] $1"
 }
 
 user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+  printf "\r  [ \033[0;33m ?  \033[0m ] $1 "
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32m OK \033[0m ] $1\n"
+}
+
+skip () {
+  printf "\r\033[2K  [ \033[00;33mSKIP\033[0m ] $1\n"
 }
 
 fail () {
@@ -54,13 +58,13 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink -o -name \*.link.config`
+  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink -o -name \*.cfglink`
   do
     if [[ "$source" == *".symlink" ]]
     then
       dest="$HOME/.`basename \"${source%.*}\"`"
     else
-      dest="$HOME/.config/`basename \"${source%.*.*}\"`"
+      dest="$HOME/.config/`basename \"${source%.*}\"`"
     fi
 
     if [ -f $dest ] || [ -d $dest ]
@@ -72,7 +76,7 @@ install_dotfiles () {
 
       if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
       then
-        user "File already exists: `basename $source`, what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        user "File already exists: `basename $source`, what do you want to do?\n  - [s]kip\n  - [S]kip all\n  - [o]verwrite\n  - [O]verwrite all\n  - [b]ackup\n  - [B]ackup all\n"
         read -n 1 action
 
         case "$action" in
@@ -109,7 +113,7 @@ install_dotfiles () {
       then
         link_files $source $dest
       else
-        success "skipped $source"
+        skip "$source"
       fi
 
     else
