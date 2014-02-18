@@ -1,6 +1,7 @@
 # ~/.profile
 
 export EDITOR="vim"
+export BROWSER="browse"
 export PAGER="less"
 export XDG_DOWNLOAD_DIR="$HOME/downloads"
 

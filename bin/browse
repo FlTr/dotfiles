@@ -1,22 +1,4 @@
 #!/bin/bash
 # Start my favorite browser.
 
-
-# Workaround for direct connection with uzbl:
-# Squid is used as a caching proxy.
-# But ':set proxy_url= ' uses the proxy from env,
-# instead of direct connection.
-unset http_proxy
-unset HTTP_PROXY
-unset https_proxy
-unset HTTPS_PROXY
-
-# open new tab if uzbl is already running
-for fifo in $(ls /tmp/uzbl_fifo_* 2>/dev/null| sort -r) ; do
-    if [ "$(stat -c %U $fifo)" == "$USER" ] ; then
-        echo "event NEW_TAB $@" >> $fifo
-        exit 0
-    fi
-done
-
-uzbl-tabbed $@ >/dev/null 2>&1 &
+dwb $@ >/dev/null 2>&1 &
