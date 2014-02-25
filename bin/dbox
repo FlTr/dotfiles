@@ -20,7 +20,7 @@
 #
 
 #Default configuration file
-CONFIG_FILE=~/.dropbox_uploader
+CONFIG_FILE=$HOME/.config/dbox
 
 #Default chunk size in Mb for the upload process
 #It is recommended to increase this value only if you have enough free space on your /tmp partition
@@ -201,15 +201,15 @@ function usage
     echo -e "Usage: $0 COMMAND [PARAMETERS]..."
     echo -e "\nCommands:"
 
-    echo -e "\t upload   <LOCAL_FILE/DIR ...>  <REMOTE_FILE/DIR>"
-    echo -e "\t download <REMOTE_FILE/DIR> [LOCAL_FILE/DIR]"
-    echo -e "\t delete   <REMOTE_FILE/DIR>"
-    echo -e "\t move     <REMOTE_FILE/DIR> <REMOTE_FILE/DIR>"
-    echo -e "\t copy     <REMOTE_FILE/DIR> <REMOTE_FILE/DIR>"
-    echo -e "\t mkdir    <REMOTE_DIR>"
-    echo -e "\t list     [REMOTE_DIR]"
-    echo -e "\t share    <REMOTE_FILE>"
-    echo -e "\t info"
+    echo -e "\t put [upload]   <LOCAL_FILE/DIR ...>  <REMOTE_FILE/DIR>"
+    echo -e "\t get [download] <REMOTE_FILE/DIR> [LOCAL_FILE/DIR]"
+    echo -e "\t rm  [delete]   <REMOTE_FILE/DIR>"
+    echo -e "\t mv  [move]     <REMOTE_FILE/DIR> <REMOTE_FILE/DIR>"
+    echo -e "\t cp  [copy]     <REMOTE_FILE/DIR> <REMOTE_FILE/DIR>"
+    echo -e "\t mkdir         <REMOTE_DIR>"
+    echo -e "\t ls  [list]     [REMOTE_DIR]"
+    echo -e "\t share         <REMOTE_FILE>"
+    echo -e "\t i   [info]"
     echo -e "\t unlink"
 
     echo -e "\nOptional parameters:"
@@ -1110,7 +1110,7 @@ let argnum=$#-$OPTIND
 #CHECKING PARAMS VALUES
 case $COMMAND in
 
-    upload)
+    put|upload)
 
         if [[ $argnum < 2 ]]; then
             usage
@@ -1125,7 +1125,7 @@ case $COMMAND in
 
     ;;
 
-    download)
+    get|download)
 
         if [[ $argnum < 1 ]]; then
             usage
@@ -1150,13 +1150,13 @@ case $COMMAND in
 
     ;;
 
-    info)
+    i|info)
 
         db_account_info
 
     ;;
 
-    delete|remove)
+    rm|delete|remove)
 
         if [[ $argnum < 1 ]]; then
             usage
@@ -1168,7 +1168,7 @@ case $COMMAND in
 
     ;;
 
-    move|rename)
+    mv|move|rename)
 
         if [[ $argnum < 2 ]]; then
             usage
@@ -1181,7 +1181,7 @@ case $COMMAND in
 
     ;;
 
-    copy)
+    cp|copy)
 
         if [[ $argnum < 2 ]]; then
             usage
@@ -1206,7 +1206,7 @@ case $COMMAND in
 
     ;;
 
-    list)
+    ls|list)
 
         DIR_DST=$ARG1
 
