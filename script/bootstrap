@@ -47,7 +47,19 @@ setup_gitconfig () {
 }
 
 link_files () {
-  ln -s $1 $2
+  if [ "$(uname -o)" == "Msys" ]
+  then
+    tgt=`cygpath -w $1`
+    lnk=`cygpath -w $2`
+    if [ -d "$1" ]
+    then
+      cmd /c "mklink /D $lnk $tgt" > /dev/null
+    else
+      cmd /c "mklink $lnk $tgt" > /dev/null
+    fi
+  else
+    ln -s $1 $2
+  fi
   success "linked $1 to $2"
 }
 
@@ -122,6 +134,21 @@ install_dotfiles () {
 
   done
 }
+
+check_permissions () {
+  # 'net file' needs administrator permissions.
+  net file > /dev/null 2>&1 && admin=true || admin=false
+  if [ "$admin" == "false" ]
+  then
+    fail "Administrator permissions required."
+  fi
+}
+
+# If we are on windows, we need administrator permissions for symlinking.
+if [ "$(uname -o)" == "Msys" ]
+then
+  check_permissions
+fi
 
 setup_gitconfig
 install_dotfiles
