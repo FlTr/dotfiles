@@ -55,6 +55,7 @@ prompt_prefix () {
 
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 #export PROMPT=$'\n$(prompt_prefix) $(directory_name) $(git_dirty)$(need_push)\n› '
 #export PROMPT=$'$(prompt_prefix) $(directory_name) $(__git_ps1 "(%s)")\n› '
 
