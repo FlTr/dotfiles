@@ -4,6 +4,10 @@
 xmodmap -e 'clear Lock'
 xmodmap -e 'keysym Caps_Lock = Control_L' -e 'add Control = Control_L'
 
+# Escape -> Control_L
+xmodmap -e 'keysym Escape = Control_L' -e 'add Control = Control_L'
+xmodmap -e 'keycode 255 = Escape' # keep a definition for xcape
+
 # ö -> [ # Shift+ö -> { # AltGr+ö -> ö # Shift+AltGr+ö -> Ö
 xmodmap -e 'keysym odiaeresis = bracketleft braceleft bracketleft braceleft odiaeresis Odiaeresis odiaeresis'
 
