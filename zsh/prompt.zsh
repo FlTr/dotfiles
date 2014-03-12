@@ -12,16 +12,17 @@ fi
 git_dirty () {
   local st
   st=$($git status --porcelain 2>&1)
-  if [[ "$st" =~ "^fatal" ]] ; then
-    echo ""
-  else
-    if [[ "$st" == "" ]]
-    then
+  case $st in
+    fatal*)
+      echo ""
+      ;;
+    "")
       echo "[%{$fg[green]%}$(git_prompt_info)%{$reset_color%}]"
-    else
+      ;;
+    *)
       echo "[%{$fg[red]%}$(git_prompt_info)%{$reset_color%}]"
-    fi
-  fi
+      ;;
+  esac
 }
 
 git_prompt_info () {
