@@ -38,3 +38,6 @@ do
 done
 
 unset config_files
+
+# rbenv should be last
+(( $+commands[rbenv] )) && eval "$(rbenv init -)"

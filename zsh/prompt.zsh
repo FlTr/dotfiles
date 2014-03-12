@@ -53,9 +53,9 @@ prompt_prefix () {
 
 export PROMPT=$'$(prompt_prefix) $(directory_name) › '
 export RPROMPT='$(need_push)$(git_dirty)'
-if which rvm-prompt > /dev/null
+if (( $+commands[rbenv] ))
 then
-  export RPROMPT=$RPROMPT'(%{$fg[yellow]%}$(rvm-prompt)%{$reset_color%})'
+  export RPROMPT=$RPROMPT'(%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%})'
 fi
 
 precmd () {
