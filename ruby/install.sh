@@ -12,5 +12,5 @@ fi
 
 if [[ ! -d "$HOME/.rbenv/plugins/ruby-each" ]]
 then
-  git clone https://github.com/chriseppstein/rbenv-each.git $HOME/.rbenv/plugins/ruby-each
+  git clone https://github.com/chriseppstein/rbenv-each.git $HOME/.rbenv/plugins/rbenv-each
 fi
