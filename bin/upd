@@ -7,13 +7,13 @@
 
 which yaourt > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    yaourt -Syua
+    yaourt -Syua "$@"
     exit 0
 fi
 
 which pacman > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    sudo pacman --sync --refresh --sysupgrade
+    sudo pacman --sync --refresh --sysupgrade "$@"
     exit 0
 fi
 
