@@ -79,7 +79,7 @@ set -g message-attr bright
 set -g status-left-length 30
 set -g status-left '#[fg=green](#[default]#S#[fg=green])(#[default]#(whoami)@#H#[fg=green])#[default]'
 set -g status-right-length 30
-set -g status-right '#[fg=green](#[default]%H:%M#[fg=green])(#[default]%d.%m.%y#[fg=green])(#[default]CW ##%V#[fg=green])#[default]'
+set -g status-right '#[fg=green](#[default]%d.%m#[fg=green])(#[default]##%V#[fg=green])(#[default]%H:%M#[fg=green])#[default]'
 set -g status-justify centre # center align window list
 
 # Start window indexing at one instead of zero
