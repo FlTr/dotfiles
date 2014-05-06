@@ -30,6 +30,7 @@ set laststatus=2 " Required to show airline statusbar
 set noshowmode " Hide default mode indicator
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = "badwolf"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
