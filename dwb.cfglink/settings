@@ -159,3 +159,6 @@ message-delay=2
 scheme-handler=
 default-font-size=12
 enable-offline-web-application-cache=true
+tabbar-height=0
+statusbar-height=0
+favicon-size=0
