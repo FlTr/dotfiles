@@ -1,0 +1,115 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Original source: https://github.com/raaapha/dict.cc.py
+
+try:
+    # py2
+    from urllib2 import Request
+    from urllib2 import urlopen
+    from urllib import quote
+    from collections import OrderedDict
+
+    def convert_urlopen_result(result):
+        return result
+except ImportError:
+    # py3
+    from urllib.request import Request
+    from urllib.request import urlopen
+    from urllib.parse import quote
+    from collections import OrderedDict
+
+    def convert_urlopen_result(result):
+        return str(result, encoding='utf8')
+
+from re import findall
+
+
+class DictCC(object):
+    def __init__(self, in_lang, out_lang):
+        self._in_lang = in_lang
+        self._out_lang = out_lang
+        self.result = {}
+
+    def translate(self, words):
+        query = quote(' '.join(args.words))
+        lang_prefix = self._in_lang + self._out_lang
+
+        # Trick to avoid dict.cc from denying the request:
+        # -> Change user-agent to firefox's.
+        req = Request('http://' + lang_prefix + '.dict.cc/?s=' + query, None,
+                      {'User-agent': 'Mozilla/5.0'})
+
+        response = convert_urlopen_result(urlopen(req).read())
+
+        return self._parse_response(response)
+
+    def _parse_response(self, response):
+        in_src = out_src = ''
+        lines = response.split("\n")
+
+        for l in lines:
+            if l.find("var c1Arr") >= 0:
+                in_src = l
+            elif l.find("var c2Arr") >= 0:
+                out_src = l
+
+        if in_src and out_src:
+            pattern = '"[^,]*"'
+
+            inputs = findall(pattern, in_src)
+            outputs = findall(pattern, out_src)
+
+            # if len(inputs) != len(outputs):
+            #     print("WARNiNG: in/out length mismatch: #in=" +
+            #           str(len(inputs)) + " #out=" + str(len(outputs)))
+            #     print(">>> in_src= " + in_src + "\n")
+            #     print(">>> inputs= " + str(inputs) + "\n")
+            #     print("<<< out_src=" + out_src + "\n")
+            #     print("<<< outputs=" + str(outputs) + "\n")
+
+            for in_word, out_word in zip(inputs, outputs):
+                in_word = in_word.strip('"').replace('\\', '')
+                out_word = out_word.strip('"').replace('\\', '')
+
+                if in_word:
+                    if in_word not in self.result.keys():
+                        self.result[in_word] = []
+                    self.result[in_word].append(out_word)
+
+            self.result = OrderedDict(sorted(self.result.items()))
+
+        return self.result
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-r', '--reverse', action='store_true',
+                        help='Swap input and output languages.')
+    parser.add_argument('-i', '--input-language', default='de',
+                        help='Set input language. Default: "de" for German.')
+    parser.add_argument('-o', '--output-language', default='en',
+                        help='Set output language. Default: "en" for English.')
+    parser.add_argument('words', metavar='WORD', nargs='+',
+                        help='List of words.')
+
+    args = parser.parse_args()
+
+    in_lang = args.input_language
+    out_lang = args.output_language
+    if args.reverse:
+        in_lang, out_lang = out_lang, in_lang
+
+    dictcc = DictCC(in_lang, out_lang)
+    result = dictcc.translate(args.words)
+
+    print('--> ' + in_lang.upper() + "-" + out_lang.upper())
+    for k, v in result.items():
+        print("  " + k)
+        for w in v:
+            if v.index(w) == len(v) - 1:
+                print("    `- " + w)
+            else:
+                print("    |- " + w)
