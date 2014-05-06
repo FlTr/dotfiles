@@ -14,6 +14,7 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s -%Creset%C(y
 alias gp='git push origin HEAD'
 alias gd='git diff -M'
 alias gds='git diff -M --staged'
+alias gdw='git diff -M --word-diff=color'
 alias gdt='git difftool --dir-diff' # --dir-diff needs git >= 1.7.11
 alias gc='git commit'
 alias gcv='git commit -v'
