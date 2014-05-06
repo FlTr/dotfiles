@@ -20,19 +20,15 @@ unbind '"'
 bind '"' splitw -h
 bind _ splitw
 
-# ctrl+left/right w/o prefix: cycle thru windows
-bind-key -n C-right next
-bind-key -n C-left prev
+# alt + h/j/k/l w/o prefix: selecting pane
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
 
-# h/l: cycle thru windows
-bind-key l next
-bind-key h prev
-
-# ctrl + h/j/k/l: selecting pane
-bind-key C-h select-pane -L
-bind-key C-j select-pane -D
-bind-key C-k select-pane -U
-bind-key C-l select-pane -R
+# ctrl + alt + h/l w/o prefix: cycle thru windows
+bind -n M-C-h prev
+bind -n M-C-l next
 
 # vi-style controls for copy mode
 setw -g mode-keys vi
