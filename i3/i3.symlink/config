@@ -145,10 +145,12 @@ for_window [class="Gitg"] floating enable
 # finds out, if available)
 bar {
         output VBOX0
+        mode hide
         status_command i3status -c ~/.config/i3status/work1
 }
 
 bar {
         output VBOX1
+        mode hide
         status_command i3status -c ~/.config/i3status/work2
 }
