@@ -11,7 +11,7 @@ tmux has-session -t $SESSION > /dev/null 2>&1 || {
     tmux select-window -t $SESSION:1
 }
 
-tmux attach -t $SESSION
-
 # hide border if using i3
 which i3-msg > /dev/null 2>&1 && i3-msg border none
+
+tmux attach -t $SESSION
