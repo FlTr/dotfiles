@@ -24,5 +24,8 @@ f="$HOME/.localxinitrc"
 f="$HOME/.dotfiles/bin/remap-kb"
 [ -x "$f" ] && "$f"
 
+f="/usr/bin/dunst"
+[ -x "$f" ] && "$f" &
+
 unset f
 exec i3
