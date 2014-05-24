@@ -1,7 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Source:
-"       https://github.com/amix/vimrc
-"
+" Based on: https://github.com/amix/vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -19,6 +17,7 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'chriskempson/base16-vim'
+Bundle 'Valloric/YouCompleteMe'
 
 filetype plugin indent on
 
@@ -33,15 +32,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = "badwolf"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=500
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -53,9 +43,20 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Reflow paragraph
+nmap <leader>r vipgq
+
 " Exit insertmode via ii
 inoremap ii <esc><cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Set to auto read when a file is changed from the outside
+set autoread
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
