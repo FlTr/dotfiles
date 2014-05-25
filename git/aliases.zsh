@@ -10,7 +10,7 @@ fi
 alias g=git
 alias ga='git add'
 alias gl='git pull --prune'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s -%Creset%C(yellow)%d %Creset%Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias glog="git log --graph --pretty=format:'%C(red)%h%C(reset) %s %C(cyan)@%an%C(reset)%C(yellow)%d %C(reset)%C(green)(%cr)%C(reset)' --abbrev-commit --date=relative"
 alias gp='git push origin HEAD'
 alias gd='git diff -M'
 alias gds='git diff -M --staged'
