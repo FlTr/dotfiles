@@ -2,6 +2,7 @@ URxvt.background: #000000
 URxvt.foreground: #E6E6E6
 URxvt.font: xft:DejaVu Sans Mono for Powerline:size=10:antialias=true:dpi=96
 URxvt.scrollBar: false
+URxvt.cursorBlink: 1
 
 URxvt*saveLines: 10000
 URxvt*transparent: true
