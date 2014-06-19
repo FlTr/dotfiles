@@ -137,6 +137,7 @@ if has("gui_running")
     set t_Co=256
     colorscheme base16-default
     set guitablabel=%M\ %t
+    set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
