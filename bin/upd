@@ -15,7 +15,7 @@ fi
 which pacman > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     sudo pacman --sync --refresh --sysupgrade "$@"
-    packcache -rk2
+    paccache -rk2
     exit 0
 fi
 
