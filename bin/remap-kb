@@ -14,6 +14,9 @@ xmodmap -e 'keysym odiaeresis = bracketleft braceleft bracketleft braceleft odia
 # ä -> ] # Shift+ä -> ] # AltGr+ä -> ä # Shift+AltGr+ä -> Ä
 xmodmap -e 'keysym adiaeresis = bracketright braceright bracketright braceright adiaeresis Adiaeresis adiaeresis'
 
+# ü -> / # Shift+ü -> \ # AltGr+ü -> ü # Shift+AltGr+ü -> Ü
+xmodmap -e 'keysym udiaeresis = slash backslash slash backslash udiaeresis Udiaeresis udiaeresis'
+
 # http://github.com/alols/xcape
 # Control_L (Caps_Lock) -> Escape if pressed standalone
 if [ `uname -m` =  "armv7l" ]; then
