@@ -2,14 +2,15 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
-if (( $+commands[git] ))
-then
+if (( $+commands[git] )) ; then
   git="$commands[git]"
 else
   git="/usr/bin/git"
 fi
 
 git_dirty () {
+  [ -n "$NO_GIT_PROMPT" ] && return
+
   local st
   st=$($git status --porcelain 2>&1)
   case $st in
@@ -36,6 +37,8 @@ unpushed () {
 }
 
 need_push () {
+  [ -n "$NO_GIT_PROMPT" ] && return
+
   if [[ $(unpushed) == "" ]] ; then
     echo ""
   else
