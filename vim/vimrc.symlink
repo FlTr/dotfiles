@@ -52,6 +52,10 @@ nmap <leader>h :bp<cr>
 " Reflow paragrah
 nmap <leader>r vipgq
 
+if has("win32")
+  " github.com/derekmcloughlin/gvimfullscreen_win32
+  map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
