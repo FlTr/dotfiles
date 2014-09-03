@@ -47,7 +47,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>r vipgq
 
 " Exit insertmode via ii
-inoremap ii <esc><cr>
+inoremap ii <esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
