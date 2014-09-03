@@ -1,116 +1,89 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Based on: https://github.com/amix/vimrc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-" Custom bundles here:
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'chriskempson/base16-vim'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'sjl/badwolf'
+if !has("win32")
+  Plugin 'Valloric/YouCompleteMe'
+endif
 
+call vundle#end()
 filetype plugin indent on
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline
+" Plugins
+
+" Airline
 set laststatus=2 " Required to show airline statusbar
 set noshowmode " Hide default mode indicator
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = "badwolf"
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Key bindings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Load prebuild ycm on windows
+"   - bitbucket.org/Haroogan/vim-youcompleteme-for-windows
+"   - make sure python2 is on path
+if has("win32") && isdirectory(expand("~/.vim/ycm-win"))
+  set rtp+=~/.vim/ycm-win
+endif
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key bindings
+
 let mapleader = ","
-let g:mapleader = ","
 
-" Fast saving
+inoremap ii <esc>
 nmap <leader>w :w!<cr>
+nmap <leader>tt :NERDTree<cr>
+nmap <leader>l :bn<cr>
+nmap <leader>h :bp<cr>
 
-" Reflow paragraph
+" Reflow paragrah
 nmap <leader>r vipgq
 
-" Exit insertmode via ii
-inoremap ii <esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=500
+" General
 
-" Set to auto read when a file is changed from the outside
-set autoread
+set history=500 " Sets how many lines of history VIM has to remember
+set autoread " Set to auto read when a file is changed from the outside
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" enable mouse scroll
+" VIM user interface
+
 set mouse=a
-
-" Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
-" Turn on the WiLd menu
+set wildmode=longest:full,full
 set wildmenu
-
-" Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-
-"Always show current position
 set ruler
-
-" Height of the command bar
 set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
 set hid
-
-" Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
 set ignorecase
-
-" When searching try to be smart about cases
 set smartcase
-
-" Highlight search results
 set hlsearch
-
-" Makes search act like search in modern browsers
 set incsearch
 
-" Don't redraw while executing macros (good performance config)
 set lazyredraw
-
-" For regular expressions turn magic on
 set magic
-
-" Show matching brackets when text indicator is over them
 set showmatch
-
-" How many tenths of a second to blink when matching brackets
 set mat=2
 
-" No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
@@ -118,67 +91,49 @@ set tm=500
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
+" Colors and Fonts
+
 syntax enable
-
 set t_Co=256
-
 set background=dark
-colorscheme desert
+colorscheme badwolf
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
-    set guioptions-=r " disable right scrollbar
-    set guioptions-=b " disable bottom scrollbar
+    set guioptions-=T guioptions-=t guioptions-=r guioptions-=b guioptions-=L
+    set guioptions-=m
     set t_Co=256
-    colorscheme base16-default
     set guitablabel=%M\ %t
     set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 endif
 
-" Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
-
-" Use Unix as the standard file type
 set ffs=unix,dos,mac
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Files, backups and undo
+
 set nobackup
 set nowb
 set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
+" Text, tab and indent related
+
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-
-" Linebreak on 500 characters
 set lbr
 set tw=500
-
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-" Visualize tabs and trailing whitespace
 set list listchars=tab:»·,trail:·
 
-" Enable modeline
 set modeline
+
+" vim:set et ts=2 sw=2 sts=2:
