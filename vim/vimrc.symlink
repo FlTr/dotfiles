@@ -43,7 +43,7 @@ endif
 
 let mapleader = ","
 
-inoremap ii <esc>
+inoremap kj <esc>
 inoremap jk <esc>
 nmap <leader>w :w!<cr>
 nmap <leader>tt :NERDTree<cr>
@@ -55,7 +55,6 @@ nmap <leader>h :bp<cr>
 nmap <leader>r vipgq | " Reflow paragrah
 
 if has("win32")
-  " github.com/derekmcloughlin/gvimfullscreen_win32
   map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 endif
 
