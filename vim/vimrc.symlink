@@ -44,13 +44,15 @@ endif
 let mapleader = ","
 
 inoremap ii <esc>
+inoremap jk <esc>
 nmap <leader>w :w!<cr>
 nmap <leader>tt :NERDTree<cr>
+nmap L :bn<cr>
+nmap H :bp<cr>
 nmap <leader>l :bn<cr>
 nmap <leader>h :bp<cr>
 
-" Reflow paragrah
-nmap <leader>r vipgq
+nmap <leader>r vipgq | " Reflow paragrah
 
 if has("win32")
   " github.com/derekmcloughlin/gvimfullscreen_win32
