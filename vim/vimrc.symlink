@@ -45,14 +45,14 @@ let mapleader = ","
 
 inoremap kj <esc>
 inoremap jk <esc>
-nmap <leader>w :w!<cr>
-nmap <leader>tt :NERDTree<cr>
-nmap L :bn<cr>
-nmap H :bp<cr>
-nmap <leader>l :bn<cr>
-nmap <leader>h :bp<cr>
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>tt :NERDTree<cr>
+nnoremap L :bn<cr>
+nnoremap H :bp<cr>
+nnoremap <leader>l :bn<cr>
+nnoremap <leader>h :bp<cr>
 
-nmap <leader>r vipgq | " Reflow paragrah
+nnoremap <leader>r vipgq | " Reflow paragrah
 
 if has("win32")
   map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
