@@ -1,4 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+
+set encoding=utf8
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 
 set nocompatible
@@ -57,16 +63,18 @@ nnoremap L :bn<cr>
 nnoremap H :bp<cr>
 nnoremap <leader>l :bn<cr>
 nnoremap <leader>h :bp<cr>
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
+nnoremap <m-h> <c-w>h
+nnoremap <m-j> <c-w>j
+nnoremap <m-k> <c-w>k
+nnoremap <m-l> <c-w>l
 
-nnoremap <leader>r vipgq | " Reflow paragrah
+" Reflow paragrah
+nnoremap <leader>r vipgq
 
 if has("win32")
   map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -122,7 +130,6 @@ if has("gui_running")
     set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 endif
 
-set encoding=utf8
 set ffs=unix,dos,mac
 
 
