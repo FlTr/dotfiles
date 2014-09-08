@@ -12,6 +12,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'sjl/badwolf'
 if !has("win32")
   Plugin 'Valloric/YouCompleteMe'
