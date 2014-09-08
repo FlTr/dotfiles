@@ -1,13 +1,17 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 
+set nocompatible
 set encoding=utf8
+set ffs=unix ",dos,mac
+
+set history=200
+set autoread
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 
-set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -77,13 +81,6 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
-
-set history=500 " Sets how many lines of history VIM has to remember
-set autoread " Set to auto read when a file is changed from the outside
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM user interface
 
 set mouse=a
@@ -130,8 +127,6 @@ if has("gui_running")
     set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 endif
 
-set ffs=unix,dos,mac
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files, backups and undo
@@ -158,4 +153,4 @@ set list listchars=tab:»·,trail:·
 
 set modeline
 
-" vim:set et ts=2 sw=2 sts=2:
+" vim:set et ts=2 sw=2:
