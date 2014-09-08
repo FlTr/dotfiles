@@ -1,12 +1,53 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
+" Options
 
 set nocompatible
 set encoding=utf8
-set ffs=unix ",dos,mac
+set fileformats=unix,dos,mac
 
 set history=200
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set linebreak
+set autoindent
+set smartindent
+set wrap
+set modeline
+set noshowmode
+set nobackup
+set nowritebackup
+set noswapfile
 set autoread
+set hidden
+
+set mouse=a
+set scrolloff=7
+set wildmode=longest:full,full
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+set ruler
+set cmdheight=1
+set laststatus=2
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set lazyredraw
+set magic
+set showmatch
+set matchtime=2
+
+set noerrorbells
+set novisualbell
+set timeoutlen=500
+
+set list
+set listchars=tab:»·,trail:·
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,8 +78,6 @@ filetype plugin indent on
 " Plugins
 
 " Airline
-set laststatus=2 " Required to show airline statusbar
-set noshowmode " Hide default mode indicator
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = "badwolf"
@@ -81,36 +120,6 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM user interface
-
-set mouse=a
-set so=7
-set wildmode=longest:full,full
-set wildmenu
-set wildignore=*.o,*~,*.pyc
-set ruler
-set cmdheight=1
-set hid
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-
-set lazyredraw
-set magic
-set showmatch
-set mat=2
-
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors and Fonts
 
 syntax enable
@@ -127,30 +136,5 @@ if has("gui_running")
     set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
 endif
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Files, backups and undo
-
-set nobackup
-set nowb
-set noswapfile
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Text, tab and indent related
-
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
-set lbr
-set tw=500
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-set list listchars=tab:»·,trail:·
-
-set modeline
 
 " vim:set et ts=2 sw=2:
