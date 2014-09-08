@@ -67,7 +67,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'sjl/badwolf'
-if !has("win32")
+if has("python") && !has("win32")
   Plugin 'Valloric/YouCompleteMe'
 endif
 
@@ -86,7 +86,7 @@ let g:airline_theme = "badwolf"
 " Load prebuild ycm on windows
 "   - bitbucket.org/Haroogan/vim-youcompleteme-for-windows
 "   - make sure python2 is on path
-if has("win32") && isdirectory(expand("~/.vim/ycm-win"))
+if has("python") && has("win32") && isdirectory(expand("~/.vim/ycm-win"))
   set rtp+=~/.vim/ycm-win
 endif
 
