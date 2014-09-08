@@ -52,10 +52,15 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
 nnoremap <leader>w :w!<cr>
 nnoremap <leader>tt :NERDTree<cr>
+
 nnoremap L :bn<cr>
 nnoremap H :bp<cr>
 nnoremap <leader>l :bn<cr>
 nnoremap <leader>h :bp<cr>
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
 
 nnoremap <leader>r vipgq | " Reflow paragrah
 
