@@ -95,6 +95,7 @@ if has("python") && has("win32") && isdirectory(expand("~/.vim/ycm-win"))
   set rtp+=~/.vim/ycm-win
 endif
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key bindings
 
@@ -105,7 +106,7 @@ inoremap jk <esc>
 
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>w :w<cr>
 nnoremap <leader>tt :NERDTree<cr>
 
 nmap <space> <Plug>(easymotion-s)
