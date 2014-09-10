@@ -122,6 +122,9 @@ nnoremap <m-j> <c-w>j
 nnoremap <m-k> <c-w>k
 nnoremap <m-l> <c-w>l
 
+" Trim trailing whitespace w/o affecting the search pattern register.
+nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+
 " Reflow paragrah
 nnoremap <leader>r vipgq
 
