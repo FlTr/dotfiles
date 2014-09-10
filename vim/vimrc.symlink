@@ -50,7 +50,9 @@ set timeoutlen=500
 set list
 set listchars=tab:»·,trail:·
 
-language us
+if has("win32")
+  language us
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
