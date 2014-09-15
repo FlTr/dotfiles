@@ -76,6 +76,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'sjl/badwolf'
+Plugin 'moll/vim-bbye'
 if has("python") && !has("win32")
   Plugin 'Valloric/YouCompleteMe'
 endif
