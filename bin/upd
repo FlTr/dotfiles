@@ -1,9 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # dot
 #
 # `dot` handles installation, updates, things like that. Run it periodically
 # to make sure you're on the latest and greatest.
+
+if [[ $(uname) =~ (MSYS|MINGW) ]]; then
+    # Need two step update on msys2.
+    # See: http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/
+    case "$1" in
+        one|1 )
+            autorebase_path=$(cygpath -w /autorebase.bat)
+            pacman -Sy
+            pacman -S --needed filesystem msys2-runtime bash libreadline libiconv libarchive libgpgme libcurl pacman ncurses libintl
+            echo ">>> If anything got updated close all msys2 shells and run 'autorebase.bat'."
+            echo ">>> $autorebase_path"
+            exit 0
+            ;;
+        two|2 )
+            pacman -Su
+            paccache -rk2
+            exit 0
+            ;;
+        * )
+            echo "Step 'one(1)' or 'two(2)'?"
+            exit 1
+            ;;
+    esac
+fi
 
 which yaourt > /dev/null 2>&1
 if [ $? -eq 0 ]; then
