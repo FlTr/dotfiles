@@ -38,7 +38,7 @@ class DictCC(object):
         # Trick to avoid dict.cc from denying the request:
         # -> Change user-agent to firefox's.
         req = Request('http://' + lang_prefix + '.dict.cc/?s=' + query, None,
-                      {'User-agent': 'Mozilla/5.0'})
+                      {'User-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.103 Safari/537.36'})
 
         response = convert_urlopen_result(urlopen(req).read())
 
