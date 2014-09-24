@@ -37,7 +37,7 @@ set ruler
 set cmdheight=1
 set laststatus=2
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+set whichwrap+=<,>
 
 set ignorecase
 set smartcase
