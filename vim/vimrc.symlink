@@ -123,6 +123,8 @@ nnoremap <leader>tt :NERDTree<cr>
 
 nmap <space> <Plug>(easymotion-s)
 
+nnoremap <silent> <leader><space> :nohlsearch<cr>
+
 nnoremap L :bn<cr>
 nnoremap H :bp<cr>
 nnoremap <leader>l :bn<cr>
