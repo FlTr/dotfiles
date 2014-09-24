@@ -10,11 +10,14 @@ set nocompatible
 set encoding=utf8
 set fileformats=unix,dos,mac
 
-set history=200
 set expandtab
-set smarttab
+set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+set textwidth=80
+
+set history=200
+set smarttab
 set linebreak
 set autoindent
 set smartindent
@@ -32,12 +35,13 @@ set mouse=a
 set scrolloff=7
 set wildmode=longest:full,full
 set wildmenu
-set wildignore=*.o,*~,*.pyc
 set ruler
 set cmdheight=1
 set laststatus=2
 set backspace=eol,start,indent
 set whichwrap+=<,>
+set wildignore+=*.o,*.so,*.dll,*.exe,*.bak,*.swp,*.class,*.pyc,*.pyd,*.pyo,*~
+set wildignore+=*.zip,*.tgz,*.gz,*.bz2,*.lz,*.rar,*.7z,*.jar,*.pdf,*.mat
 
 set ignorecase
 set smartcase
@@ -53,7 +57,7 @@ set novisualbell
 set timeoutlen=500
 
 set list
-set listchars=tab:»·,trail:·
+set listchars=tab:»\ ,trail:·
 
 if has("win32")
   language us
@@ -149,11 +153,11 @@ colorscheme badwolf
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T guioptions-=t guioptions-=r guioptions-=b guioptions-=L
-    set guioptions-=m
-    set t_Co=256
-    set guitablabel=%M\ %t
-    set guifont=DejaVu_Sans_Mono_for_Powerline:h8.5:cANSI
+  set guioptions-=T guioptions-=t guioptions-=r guioptions-=b guioptions-=L
+  set guioptions-=m
+  set t_Co=256
+  set guitablabel=%M\ %t
+  set guifont=DejaVu_Sans_Mono_for_Powerline:h8.5:cANSI
 endif
 
 
