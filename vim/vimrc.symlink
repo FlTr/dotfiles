@@ -142,6 +142,41 @@ if has("win32")
 endif
 " }}}
 
+" Filetype settings {{{
+"
+" C/C++ {{{
+
+augroup ft_c_cpp
+  au!
+  au FileType c,cpp
+        \   setl foldmethod=marker
+        \ | setl foldmarker={,}
+        \ | setl shiftwidth=4
+augroup END
+
+" }}}
+" Python {{{
+
+augroup ft_python
+  au!
+  au FileType python
+        \   setl textwidth=79
+        \ | setl shiftwidth=4
+augroup END
+
+" }}}
+" Git commit {{{
+
+augroup ft_gitcommit
+  au!
+  au FileType gitcommit
+        \   setl spell
+        \ | setl colorcolumn=51,73
+augroup END
+
+" }}}
+" }}}
+
 " Colors and Fonts {{{
 "
 syntax enable
