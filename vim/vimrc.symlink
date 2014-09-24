@@ -3,9 +3,8 @@ if has("win32")
 endif
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Options
-
+" Options {{{
+"
 set nocompatible
 set encoding=utf8
 set fileformats=unix,dos,mac
@@ -62,10 +61,21 @@ set listchars=tab:»\ ,trail:·
 if has("win32")
   language us
 endif
+" }}}
 
+" Plugin settings {{{
+"
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = "badwolf"
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" easymotion
+let g:EasyMotion_smartcase = 1
+" }}}
+
+" Plugins {{{
+"
 
 filetype off
 
@@ -88,29 +98,16 @@ endif
 call vundle#end()
 filetype plugin indent on
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "badwolf"
-
-" easymotion
-let g:EasyMotion_smartcase = 1
-
 " Load prebuild ycm on windows
 "   - bitbucket.org/Haroogan/vim-youcompleteme-for-windows
 "   - make sure python2 is on path
 if has("python") && has("win32") && isdirectory(expand("~/.vim/ycm-win"))
   set rtp+=~/.vim/ycm-win
 endif
+" }}}
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Key bindings
-
+" Key bindings {{{
+"
 let mapleader = ","
 
 inoremap kj <esc>
@@ -143,11 +140,10 @@ nnoremap <leader>r vipgq
 if has("win32")
   map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 endif
+" }}}
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors and Fonts
-
+" Colors and Fonts {{{
+"
 syntax enable
 set t_Co=256
 set background=dark
@@ -161,6 +157,6 @@ if has("gui_running")
   set guitablabel=%M\ %t
   set guifont=DejaVu_Sans_Mono_for_Powerline:h8.5:cANSI
 endif
+" }}}
 
-
-" vim:set et ts=2 sw=2:
+" vim:set et ts=2 sw=2 foldmethod=marker:
