@@ -14,6 +14,7 @@ set softtabstop=-1 " sts = shiftwidth
 set shiftwidth=2
 set tabstop=8
 set textwidth=80
+set colorcolumn=+1
 
 set history=200
 set smarttab
@@ -172,6 +173,15 @@ augroup ft_gitcommit
   au FileType gitcommit
         \   setl spell
         \ | setl colorcolumn=51,73
+augroup END
+
+" }}}
+" Matlab {{{
+
+augroup ft_matlab
+  au!
+  au FileType matlab
+        \   setl shiftwidth=4
 augroup END
 
 " }}}
