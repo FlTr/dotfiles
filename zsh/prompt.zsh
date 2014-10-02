@@ -2,62 +2,56 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
+# cheers, @bliker
+# https://github.com/bliker/cmder/blob/master/config/git.lua
+
 if (( $+commands[git] )) ; then
   git="$commands[git]"
 else
   git="/usr/bin/git"
 fi
 
-git_dirty () {
-  [ -n "$NO_GIT_PROMPT" ] && return
-
-  local st
-  st=$($git status --porcelain 2>&1)
-  case $st in
-    fatal*)
-      echo ""
-      ;;
-    "")
-      echo "[%{$fg[green]%}$(git_prompt_info)%{$reset_color%}]"
-      ;;
-    *)
-      echo "[%{$fg[red]%}$(git_prompt_info)%{$reset_color%}]"
-      ;;
-  esac
-}
-
-git_prompt_info () {
-  local ref
-  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-  echo "${ref#refs/heads/}"
-}
-
-unpushed () {
-  $git cherry -v @{upstream} 2>/dev/null
-}
-
-need_push () {
-  [ -n "$NO_GIT_PROMPT" ] && return
-
-  if [[ $(unpushed) == "" ]] ; then
-    echo ""
+git_color () {
+  if $git diff --quiet --ignore-submodules HEAD 2>&1 ; then
+    echo "%{$fg[green]%}$1%{$reset_color%}"
   else
-    echo "%{$fg_bold[magenta]%}^%{$reset_color%}"
+    echo "%{$fg[red]%}$1%{$reset_color%}"
   fi
 }
 
+git_untracked () {
+  if $git status --porcelain | grep -q '^??' ; then
+    echo "%{$fg[magenta]%}?%{$reset_color%}"
+  fi
+}
+
+git_need_push () {
+  if [[ $($git cherry -v @{upstream} 2>/dev/null) != "" ]] ; then
+    echo "%{$fg[magenta]%}^%{$reset_color%}"
+  fi
+}
+
+git_prompt () {
+  local ref
+  [ -n "$NO_GIT_PROMPT" ] && return
+
+  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
+
+  ref="${ref#refs/heads/}"
+  echo "[$(git_need_push)$(git_color $ref)$(git_untracked)]"
+}
+
 directory_name () {
-  echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
+  echo "%{$fg[cyan]%}%1/%\/%{$reset_color%}"
 }
 
 prompt_prefix () {
-  echo "%{$fg_bold[green]%}~>%{$reset_color%}"
+  echo "%{$fg[green]%}~>%{$reset_color%}"
 }
 
 export PROMPT=$'$(prompt_prefix) $(directory_name) › '
-export RPROMPT='$(need_push)$(git_dirty)'
-if (( $+commands[rbenv] ))
-then
+export RPROMPT='$(git_prompt)'
+if (( $+commands[rbenv] )) ; then
   export RPROMPT=$RPROMPT'(%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%})'
 fi
 
@@ -70,4 +64,4 @@ preexec () {
   [ -n "$TMUX" ] || title "$1" "$USER@%m" "%35<...<%~"
 }
 
-# vim: ts=2:sw=2
+# vim: et:sw=2:sts=2
