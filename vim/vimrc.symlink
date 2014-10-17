@@ -73,6 +73,9 @@ let g:airline_theme = "badwolf"
 
 " easymotion
 let g:EasyMotion_smartcase = 1
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
 " }}}
 
 " Plugins {{{
@@ -131,6 +134,10 @@ nnoremap <m-h> <c-w>h
 nnoremap <m-j> <c-w>j
 nnoremap <m-k> <c-w>k
 nnoremap <m-l> <c-w>l
+inoremap <m-h> <esc><c-w>h
+inoremap <m-j> <esc><c-w>j
+inoremap <m-k> <esc><c-w>k
+inoremap <m-l> <esc><c-w>l
 
 " Trim trailing whitespace w/o affecting the search pattern register.
 nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
