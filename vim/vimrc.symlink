@@ -146,7 +146,7 @@ inoremap <m-l> <esc><c-w>l
 nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
 
 " Reflow paragrah
-nnoremap <leader>r vipgq
+nnoremap <leader>r gqip
 
 if has("win32")
   map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
