@@ -35,6 +35,8 @@ setopt INTERACTIVE_COMMENTS
 
 zle -N newtab
 
+bindkey -e # emacs mode
+
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[7~' beginning-of-line
@@ -42,3 +44,6 @@ bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
+
+bindkey '[H' beginning-of-line # mintty
+bindkey '[F' end-of-line # mintty
