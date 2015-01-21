@@ -97,6 +97,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'sjl/badwolf'
 Plugin 'moll/vim-bbye'
+Plugin 'fatih/vim-go'
 if has("python") && !has("win32")
   Plugin 'Valloric/YouCompleteMe'
 endif
@@ -192,6 +193,19 @@ augroup ft_matlab
   au!
   au FileType matlab
         \   setl shiftwidth=4
+augroup END
+
+" }}}
+" Go {{{
+
+augroup ft_go
+  au!
+  au FileType go
+        \   setl textwidth=0
+        \ | setl noexpandtab
+        \ | setl tabstop=4
+        \ | setl shiftwidth=4
+        \ | nnoremap <F5> <Plug>(go-run)
 augroup END
 
 " }}}
