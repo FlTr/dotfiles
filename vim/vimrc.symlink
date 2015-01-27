@@ -205,7 +205,7 @@ augroup ft_go
         \ | setl noexpandtab
         \ | setl tabstop=4
         \ | setl shiftwidth=4
-        \ | nnoremap <F5> <Plug>(go-run)
+        \ | nmap <buffer> <leader>m <Plug>(go-run)
 augroup END
 
 " }}}
