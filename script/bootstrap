@@ -2,6 +2,7 @@
 #
 # bootstrap installs things.
 
+cd "$(dirname "$0")/.."
 DOTFILES_ROOT="`pwd`"
 
 set -e
@@ -46,7 +47,7 @@ setup_gitconfig () {
   fi
 }
 
-link_files () {
+link_file () {
   if [ "$(uname -o)" == "Msys" ]
   then
     tgt=`cygpath -w $1`
@@ -123,13 +124,13 @@ install_dotfiles () {
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
       then
-        link_files $source $dest
+        link_file $source $dest
       else
         skip "$source"
       fi
 
     else
-      link_files $source $dest
+      link_file $source $dest
     fi
 
   done
@@ -137,7 +138,8 @@ install_dotfiles () {
 
 check_permissions () {
   # 'net file' needs administrator permissions.
-  net file > /dev/null 2>&1 && admin=true || admin=false
+  admin=false
+  net file > /dev/null 2>&1 && admin=true
   if [ "$admin" == "false" ]
   then
     fail "Administrator permissions required."
@@ -152,18 +154,6 @@ fi
 
 setup_gitconfig
 install_dotfiles
-
-# If we are on a mac, lets install and setup homebrew
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
 
 echo ''
 echo '  All installed!'
