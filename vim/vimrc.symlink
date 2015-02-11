@@ -223,6 +223,15 @@ augroup ft_tex
 augroup END
 
 " }}}
+" Help {{{
+
+augroup ft_help
+  au!
+  au FileType help
+        \   nnoremap <buffer> q :q<cr>
+augroup END
+
+" }}}
 " }}}
 
 " Colors and Fonts {{{
