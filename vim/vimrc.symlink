@@ -43,7 +43,7 @@ set backspace=eol,start,indent
 set whichwrap+=<,>
 set wildignore+=*.o,*.so,*.dll,*.exe,*.bak,*.swp,*.class,*.pyc,*.pyd,*.pyo,*~
 set wildignore+=*.zip,*.tgz,*.gz,*.bz2,*.lz,*.rar,*.7z,*.jar,*.pdf,*.mat,*.ppt
-set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.out,*.toc " LaTeX
+set wildignore+=*.aux,*.bbl,*.bcf,*.blg,*.fdb_latexmk,*.fls,*.out,*.toc " LaTeX
 
 set ignorecase
 set smartcase
@@ -60,6 +60,9 @@ set timeoutlen=500
 
 set list
 set listchars=tab:»\ ,trail:·
+
+set spelllang=en_us
+set spellfile=~/.vim/spell/en.utf-8.add
 
 if has("win32")
   language us
@@ -204,6 +207,19 @@ augroup ft_go
         \ | setl tabstop=4
         \ | setl shiftwidth=4
         \ | nmap <buffer> <leader>m <Plug>(go-run)
+augroup END
+
+" }}}
+" Tex {{{
+
+let g:tex_flavor = 'latex'
+
+augroup ft_tex
+  au!
+  au FileType tex
+        \   setl cpoptions+=J
+        \ | setl spell
+        \ | nnoremap <buffer> <leader>m :make<cr>
 augroup END
 
 " }}}
