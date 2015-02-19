@@ -227,6 +227,7 @@ augroup ft_tex
   au FileType tex
         \   setl cpoptions+=J
         \ | setl spell
+        \ | set wildignore+=*.log,*.run.xml
         \ | nnoremap <buffer> <leader>m :make<cr>
 augroup END
 
