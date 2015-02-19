@@ -47,3 +47,5 @@ bindkey '^?' backward-delete-char
 
 bindkey '[H' beginning-of-line # mintty
 bindkey '[F' end-of-line # mintty
+bindkey '[1~' beginning-of-line # tmux
+bindkey '[4~' end-of-line # tmux
