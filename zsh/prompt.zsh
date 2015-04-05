@@ -42,11 +42,19 @@ git_prompt () {
 }
 
 directory_name () {
-  echo "%{$fg[cyan]%}%1/%\/%{$reset_color%}"
+  echo "%{$fg[cyan]%}%3/%\/%{$reset_color%}"
 }
 
 prompt_prefix () {
-  echo "%{$fg[green]%}~>%{$reset_color%}"
+  local prefix
+  prefix=""
+
+  if [[ "$SSH_CONNECTION" != "" ]] ; then
+    prefix="(@%{$fg[yellow]%}%m%{$reset_color%}) "
+  fi
+
+  prefix=$prefix"%{$fg[green]%}~>%{$reset_color%}"
+  echo $prefix
 }
 
 export PROMPT=$'$(prompt_prefix) $(directory_name) › '
