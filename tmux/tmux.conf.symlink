@@ -1,8 +1,7 @@
 # ~/.tmux.conf
 
-#set -g default-terminal "screen-256color"
-set -g default-terminal "screen-it"
-set -g terminal-overrides 'screen*:smcup@:rmcup@'
+set -g default-terminal "screen-256color"
+set-window-option -g alternate-screen off
 
 # scrollback buffer
 set -g history-limit 5000
