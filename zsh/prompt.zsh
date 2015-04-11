@@ -42,7 +42,7 @@ git_prompt () {
 }
 
 directory_name () {
-  echo "%{$fg[cyan]%}%3/%\/%{$reset_color%}"
+  echo "%{$fg[cyan]%}%3~%{$reset_color%}"
 }
 
 prompt_prefix () {
