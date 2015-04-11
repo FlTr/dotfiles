@@ -136,6 +136,7 @@ bindsym $mod+r mode "i3 > Resize"
 # Window specific settings
 for_window [class="Subl"] border 1pixel
 for_window [class="Dwb" ] border 1pixel
+for_window [class="Firefox" ] border 1pixel
 for_window [class="feh"] fullscreen
 for_window [class="Gitk"] floating enable
 for_window [class="Git-gui"] floating enable
