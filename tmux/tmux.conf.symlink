@@ -13,6 +13,8 @@ set -g prefix C-a
 # toggle last window like screen
 bind C-a last-window
 
+bind a send-prefix
+
 # reload tmux conf
 bind r source-file ~/.tmux.conf \; display-message "  Config reloaded."
 
