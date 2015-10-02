@@ -7,6 +7,9 @@ function title() {
   # Truncate command, and join lines.
   a=$(print -Pn "%40>...>$a" | tr -d "\n")
 
+  # Strip color codes
+  a=$(print -Pn $a | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g")
+
   case $TERM in
   screen*)
     print -Pn "\ek$a:$3\e\\" # screen title (in ^A")
