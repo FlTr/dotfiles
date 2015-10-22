@@ -21,3 +21,8 @@ zstyle ':completion:*' list-colors ''
 # enable interactive selection (after 3rd tab)
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %p%s
+
+# complete hard drives in msys2
+drives=$(mount | sed -rn 's#^[A-Z]: on /([a-z]).*#\1#p' | tr '\n' ' ')
+[ -n "$MSYSTEM" ] && zstyle ':completion:*' fake-files /: "/:$drives"
+unset drives
