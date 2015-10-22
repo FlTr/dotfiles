@@ -109,19 +109,12 @@ Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
-if has("python") && !has("win32")
+if has("python") && $MSYSTEM == ""
   Plugin 'Valloric/YouCompleteMe'
 endif
 
 call vundle#end()
 filetype plugin indent on
-
-" Load prebuild ycm on windows
-"   - bitbucket.org/Haroogan/vim-youcompleteme-for-windows
-"   - make sure python2 is on path
-if has("python") && has("win32") && isdirectory(expand("~/.vim/ycm-win"))
-  set rtp+=~/.vim/ycm-win
-endif
 " }}}
 
 " Key bindings {{{
