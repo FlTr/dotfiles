@@ -163,8 +163,7 @@ endif
 augroup ft_c_cpp
   au!
   au FileType c,cpp
-        \   setl foldmethod=marker
-        \ | setl foldmarker={,}
+        \   setl foldmethod=syntax
         \ | setl shiftwidth=4
 augroup END
 
