@@ -90,7 +90,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Plugins {{{
 "
-
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -128,9 +127,11 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <silent> <leader>d :Bd<cr>
-nnoremap <leader>tt :NERDTree<cr>
+nnoremap <leader>tt :NERDTreeToggle<cr>
 
-nmap <space> <Plug>(easymotion-s)
+map <m-space> <Plug>(easymotion-s)
+
+nnoremap <space> za
 
 nnoremap <silent> <leader><space> :nohlsearch<cr>
 
