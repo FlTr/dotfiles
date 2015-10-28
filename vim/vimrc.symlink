@@ -225,6 +225,17 @@ augroup ft_tex
 augroup END
 
 " }}}
+" XML {{{
+
+let g:xml_syntax_folding=1
+
+augroup ft_xml
+  au!
+  au FileType xml
+        \   setl foldmethod=syntax
+augroup END
+
+" }}}
 " Help {{{
 
 augroup ft_help
