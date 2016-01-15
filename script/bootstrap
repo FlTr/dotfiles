@@ -48,7 +48,7 @@ setup_gitconfig () {
 }
 
 link_file () {
-  if [ "$(uname -o)" == "Msys" ]
+  if [ "$(uname)" == "Msys" ]
   then
     tgt=`cygpath -w $1`
     lnk=`cygpath -w $2`
@@ -147,7 +147,7 @@ check_permissions () {
 }
 
 # If we are on windows, we need administrator permissions for symlinking.
-if [ "$(uname -o)" == "Msys" ]
+if [ "$(uname)" == "Msys" ]
 then
   check_permissions
 fi
