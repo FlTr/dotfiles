@@ -2,9 +2,7 @@ if has("win32")
   let &runtimepath = substitute(&runtimepath,'\v(Documents and Settings|Users)[\/][^\/,]*[\/]\zsvimfiles','.vim','g')
 endif
 
-
 " Options {{{
-"
 set nocompatible
 set encoding=utf8
 set fileformats=unix,dos,mac
@@ -69,27 +67,7 @@ if has("win32")
 endif
 " }}}
 
-" Plugin settings {{{
-"
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "badwolf"
-
-" easymotion
-let g:EasyMotion_smartcase = 1
-
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-h>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" }}}
-
 " Plugins {{{
-"
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -98,18 +76,27 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'bling/vim-airline'
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_theme = "badwolf"
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
+  let g:EasyMotion_smartcase = 1
 Plugin 'sjl/badwolf'
 Plugin 'moll/vim-bbye'
 Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips'
+  let g:UltiSnipsExpandTrigger="<c-h>"
+  let g:UltiSnipsJumpForwardTrigger="<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plugin 'honza/vim-snippets'
 
 if has("python") && $MSYSTEM == ""
   Plugin 'Valloric/YouCompleteMe'
+    let g:ycm_autoclose_preview_window_after_completion = 1
 endif
 
 call vundle#end()
@@ -117,7 +104,6 @@ filetype plugin indent on
 " }}}
 
 " Key bindings {{{
-"
 let mapleader = ","
 
 inoremap kj <esc>
@@ -158,7 +144,6 @@ endif
 " }}}
 
 " Filetype settings {{{
-"
 " C/C++ {{{
 
 augroup ft_c_cpp
@@ -248,7 +233,6 @@ augroup END
 " }}}
 
 " Colors and Fonts {{{
-"
 syntax enable
 set t_Co=256
 set background=dark
