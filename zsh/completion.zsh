@@ -14,7 +14,11 @@ zstyle ':completion:*' insert-tab pending
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(..)'
 
 # complete with colors
-eval "$(dircolors -b)"
+if [ "$(uname)" = "Darwin" ] ; then
+  eval "$(gdircolors -b)"
+else
+  eval "$(dircolors -b)"
+fi
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 
@@ -23,6 +27,7 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %p%s
 
 # complete hard drives in msys2
-drives=$(mount | sed -rn 's#^[A-Z]: on /([a-z]).*#\1#p' | tr '\n' ' ')
-[ -n "$MSYSTEM" ] && zstyle ':completion:*' fake-files /: "/:$drives"
-unset drives
+[ -n "$MSYSTEM" ] && (
+  drives=$(mount | sed -rn 's#^[A-Z]: on /([a-z]).*#\1#p' | tr '\n' ' ')
+  zstyle ':completion:*' fake-files /: "/:$drives"
+)
