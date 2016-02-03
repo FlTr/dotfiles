@@ -83,7 +83,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
   let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
   let g:EasyMotion_smartcase = 1
 Plugin 'sjl/badwolf'
 Plugin 'moll/vim-bbye'
@@ -115,7 +115,7 @@ nnoremap <leader>w :w<cr>
 nnoremap <silent> <leader>d :Bd<cr>
 nnoremap <leader>tt :NERDTreeToggle<cr>
 
-map <m-space> <Plug>(easymotion-s)
+map s <Plug>(easymotion-s)
 
 nnoremap <space> za
 
