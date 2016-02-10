@@ -1,6 +1,7 @@
 # ~/.tmux.conf
 
 set -g default-terminal "screen-256color"
+set -g escape-time 5
 set-window-option -g alternate-screen off
 
 # scrollback buffer
@@ -23,11 +24,12 @@ unbind '"'
 bind '"' splitw -h
 bind _ splitw
 
-# alt + h/j/k/l w/o prefix: selecting pane
-bind -n M-h select-pane -L
-bind -n M-j select-pane -D
-bind -n M-k select-pane -U
-bind -n M-l select-pane -R
+# alt + h/j/k/l w/o prefix: selecting pane/vim window
+# https://gist.github.com/tarruda/5158535
+bind -n M-h run 'zsh $ZSH/bin/vim-tmux-move h'
+bind -n M-j run 'zsh $ZSH/bin/vim-tmux-move j'
+bind -n M-k run 'zsh $ZSH/bin/vim-tmux-move k'
+bind -n M-l run 'zsh $ZSH/bin/vim-tmux-move l'
 
 # ctrl + alt + h/l w/o prefix: cycle thru windows
 bind -n M-C-h prev
@@ -38,10 +40,11 @@ setw -g mode-keys vi
 unbind [
 bind Escape copy-mode
 bind C-s copy-mode
-unbind p
-bind p run "tmux set-buffer \"$(xsel -ob)\"; tmux paste-buffer"
 bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-pipe 'xsel -ib'
+bind -t vi-copy 'y' copy-pipe 'zsh $ZSH/bin/clip-copy'
+unbind p
+bind p run "zsh $ZSH/bin/vim-tmux-paste"
+bind -n M-p run "zsh $ZSH/bin/vim-tmux-paste"
 
 # border color
 set -g pane-border-fg white
@@ -80,9 +83,5 @@ set -g status-justify centre # center align window list
 # Start window indexing at one instead of zero
 set -g base-index 1
 
-# mouse stuff, keep all off to keep usual features like scrolling in less, copy and paste
-setw -g mode-mouse off
-set -g mouse-select-pane off
-setw -g mouse-select-window off
-
-set -s escape-time 0
+# mouse off to keep usual features like scrolling in less, copy and paste
+set -g mouse off

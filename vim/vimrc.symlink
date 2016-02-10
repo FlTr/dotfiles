@@ -248,4 +248,71 @@ if has("gui_running")
 endif
 " }}}
 
+" Tmux integration {{{
+if $TMUX != ''
+  " https://gist.github.com/tarruda/5158535
+  " integrate movement between tmux/vim panes/windows
+
+  function! TmuxMove(direction)
+    " Check if we are currently focusing on a edge window.
+    " To achieve that, move to/from the requested window and
+    " see if the window number changed
+    let oldw = winnr()
+    silent! exe 'wincmd ' . a:direction
+    let neww = winnr()
+    silent! exe oldw . 'wincmd'
+    if oldw == neww
+      " The focused window is at an edge, so ask tmux to switch panes
+      if a:direction == 'j'
+        call system("tmux select-pane -D")
+      elseif a:direction == 'k'
+        call system("tmux select-pane -U")
+      elseif a:direction == 'h'
+        call system("tmux select-pane -L")
+      elseif a:direction == 'l'
+        call system("tmux select-pane -R")
+      endif
+    else
+      exe 'wincmd ' . a:direction
+    end
+  endfun
+
+
+  function! TmuxSharedYank()
+    " Send the contents of the 't' register to a temporary file, invoke
+    " copy to tmux using load-buffer, and then to xclip
+    " FIXME for some reason, the 'tmux load-buffer -' form will hang
+    " when used with 'system()' which takes a second argument as stdin.
+    let tmpfile = tempname()
+    call writefile(split(@t, '\n'), tmpfile, 'b')
+    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | clip-copy')
+    call delete(tmpfile)
+  endfunction
+
+
+  function! TmuxSharedPaste()
+    " put tmux copy buffer into the t register, the mapping will handle
+    " pasting into the buffer
+    let @t = system('clip-paste | tmux load-buffer -;tmux show-buffer')
+  endfunction
+
+
+  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
+
+  vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
+  vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
+  nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
+  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+
+endif
+" }}}
+
 " vim:set et sw=2 foldmethod=marker:
