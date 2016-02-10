@@ -6,4 +6,5 @@ fi
 alias l="ls -FC"
 alias ll="ls -Falh"
 alias la="ls -FA"
+alias lt="ls -Ft"
 alias grep="grep --color=auto"
