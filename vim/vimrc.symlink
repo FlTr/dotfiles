@@ -78,8 +78,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
-  let g:airline_theme = "badwolf"
 Plugin 'vim-airline/vim-airline-themes'
+  let g:airline_theme = "badwolf"
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
   let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -94,6 +94,7 @@ Plugin 'SirVer/ultisnips'
   let g:UltiSnipsJumpForwardTrigger="<c-j>"
   let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plugin 'honza/vim-snippets'
+Plugin 'm42e/arxml.vim'
 
 if has("python") && $MSYSTEM == ""
   Plugin 'Valloric/YouCompleteMe'
