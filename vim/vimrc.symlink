@@ -1,11 +1,12 @@
+" Options {{{
 if has("win32")
   let &runtimepath = substitute(&runtimepath,'\v(Documents and Settings|Users)[\/][^\/,]*[\/]\zsvimfiles','.vim','g')
 endif
 
-" Options {{{
 set nocompatible
 set encoding=utf8
 set fileformats=unix,dos,mac
+set nrformats-=octal
 
 set expandtab
 set softtabstop=-1 " sts = shiftwidth
@@ -94,7 +95,6 @@ Plugin 'SirVer/ultisnips'
   let g:UltiSnipsJumpForwardTrigger="<c-j>"
   let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plugin 'honza/vim-snippets'
-Plugin 'm42e/arxml.vim'
 
 if has("python") && $MSYSTEM == ""
   Plugin 'Valloric/YouCompleteMe'
