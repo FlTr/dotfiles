@@ -308,10 +308,18 @@ if $TMUX != ''
   nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
   nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
 
-  vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
-  vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
-  nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
-  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  if has("nvim")
+    vnoremap <silent> <m-y> "ty:call TmuxSharedYank()<cr>
+    vnoremap <silent> <m-d> "td:call TmuxSharedYank()<cr>
+    nnoremap <silent> <m-p> :call TmuxSharedPaste()<cr>"tp
+    vnoremap <silent> <m-p> d:call TmuxSharedPaste()<cr>h"tp
+  else
+    vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
+    vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
+    nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
+    vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  endif
+
   set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
 
 endif

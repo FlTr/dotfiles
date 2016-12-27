@@ -9,10 +9,9 @@ else
   xclip -o -selection clipboard | tmux load-buffer -
 fi
 
-if [[ $program == "vim" ]] ; then
+case "$program" in
   # if vim is focused, send the keys so it will handle the paste itself
-  tmux send-keys 'M-p'
-else
+  *vim*) tmux send-keys 'M-p' $1 ;;
   # paste as normal terminal input into the current pane
-  tmux paste-buffer
-fi
+  *) tmux paste-buffer ;;
+esac
