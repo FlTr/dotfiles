@@ -27,7 +27,8 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %p%s
 
 # complete hard drives in msys2
-[ -n "$MSYSTEM" ] && (
+if [ -n "$MSYSTEM" ]
+then
   drives=$(mount | sed -rn 's#^[A-Z]: on /([a-z]).*#\1#p' | tr '\n' ' ')
   zstyle ':completion:*' fake-files /: "/:$drives"
-)
+fi
