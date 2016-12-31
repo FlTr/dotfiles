@@ -240,6 +240,10 @@ set t_Co=256
 set background=dark
 colorscheme badwolf
 
+hi StatusLine    gui=NONE guifg=#f8f6f2 guibg=#242321 cterm=NONE ctermfg=15  ctermbg=235
+hi WildMenu      gui=NONE guifg=#f8f6f2 guibg=#0a9dff cterm=NONE ctermfg=15  ctermbg=39
+hi MatchParen    gui=bold guifg=#ff2c4b guibg=NONE    cterm=bold ctermfg=196 ctermbg=NONE
+
 " Set extra options when running in GUI mode
 if has("gui_running")
   set guioptions=
