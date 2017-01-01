@@ -232,6 +232,15 @@ augroup ft_help
 augroup END
 
 " }}}
+" Nerdtree {{{
+
+augroup ft_nerd
+  au!
+  au FileType nerdtree
+        \   nmap <buffer> <space> o
+augroup END
+
+" }}}
 " }}}
 
 " Colors and Fonts {{{
