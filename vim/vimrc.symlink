@@ -95,6 +95,7 @@ Plugin 'SirVer/ultisnips'
   let g:UltiSnipsJumpForwardTrigger="<c-j>"
   let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plugin 'honza/vim-snippets'
+Plugin 'dyng/ctrlsf.vim'
 
 if has("python") && $MSYSTEM == ""
   Plugin 'Valloric/YouCompleteMe'
@@ -113,18 +114,21 @@ inoremap jk <esc>
 
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <silent> <leader>d :Bd<cr>
 nnoremap <leader>tt :NERDTreeToggle<cr>
 
+map <leader>g <Plug>CtrlSFPrompt
 map s <Plug>(easymotion-s)
 
 nnoremap <space> za
 
 nnoremap <silent> <leader><space> :nohlsearch<cr>
 
+" buffer
 nnoremap <silent> L :bn<cr>
 nnoremap <silent> H :bp<cr>
+nnoremap <silent> <leader>d :Bd<cr>
+
+" window navigation
 nnoremap <m-h> <c-w>h
 nnoremap <m-j> <c-w>j
 nnoremap <m-k> <c-w>k
@@ -238,6 +242,16 @@ augroup ft_nerd
   au!
   au FileType nerdtree
         \   nmap <buffer> <space> o
+augroup END
+
+" }}}
+" Quickfix {{{
+
+augroup ft_qf
+  au!
+  au FileType qf
+        \   nmap <buffer> q :q<cr>
+        \ | nmap <buffer> o <cr>
 augroup END
 
 " }}}
