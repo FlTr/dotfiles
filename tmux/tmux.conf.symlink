@@ -43,8 +43,8 @@ setw -g mode-keys vi
 unbind [
 bind Escape copy-mode
 bind C-s copy-mode
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-pipe 'zsh $ZSH/bin/clip-copy'
+bind -T copy-mode-vi 'v' send -X begin-selection
+bind -T copy-mode-vi 'y' send -X copy-pipe-and-cancel 'zsh $ZSH/bin/clip-copy'
 unbind p
 bind p run "zsh $ZSH/bin/vim-tmux-paste"
 bind -n M-p run "zsh $ZSH/bin/vim-tmux-paste"
