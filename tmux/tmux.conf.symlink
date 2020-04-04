@@ -5,7 +5,7 @@ if-shell 'test "$(uname -s)" = Darwin' 'set-option -g default-command "exec reat
 
 set -g default-terminal "screen-256color"
 set -g escape-time 5
-set-window-option -g alternate-screen off
+set -g alternate-screen off
 
 # scrollback buffer
 set -g history-limit 5000
@@ -13,11 +13,10 @@ set -g history-limit 5000
 # screen like prefix
 unbind C-b
 set -g prefix C-a
+bind a send-prefix
 
 # toggle last window like screen
 bind C-a last-window
-
-bind a send-prefix
 
 # reload tmux conf
 bind r source-file ~/.tmux.conf \; display-message "  Config reloaded."
@@ -49,34 +48,32 @@ unbind p
 bind p run "zsh $ZSH/bin/vim-tmux-paste"
 bind -n M-p run "zsh $ZSH/bin/vim-tmux-paste"
 
-# border color
-set -g pane-border-style fg=white,bg=default
-set -g pane-active-border-style fg=white,bg=default
+# pane styles
+set -g window-style bg=colour238
+set -g window-active-style bg=0
+set -g pane-border-style fg=white,bg=colour238
+set -g pane-active-border-style fg=white,bg=0
 
 # statusbar
-set -g window-status-format "#I.#W"
-set -g window-status-current-format "#[default]#[fg=green](#[default]#I.#W#[fg=green])#[default]"
-
 set -g status-bg default
 set -g status-fg white
-
-# default window title colors
-setw -g window-status-style fg=default,bg=default,dim
-
-# active window title colors
-setw -g window-status-current-style fg=default,bg=default
+set -g status-justify centre # center align window list
+set -g window-status-style fg=default,bg=default,dim
+set -g window-status-current-style fg=default,bg=default
+set -g window-status-format "#I.#W"
+set -g window-status-current-format "#[default]#[fg=colour4](#[default]#I.#W#[fg=colour4])#[default]"
+set -g status-left-length 30
+set -g status-left '#[fg=colour4](#[default]#S#[fg=colour4])(#[default]#(whoami)@#H#[fg=colour4])#[default]'
+set -g status-right-length 30
+set -g status-right '#[fg=colour4](#[default]%d.%m#[fg=colour4])(#[default]##%V#[fg=colour4])(#[default]%H:%M#[fg=colour4])#[default]'
 
 # command/message line colors
 set -g message-style fg=white,bg=default,bright
-
-set -g status-left-length 30
-set -g status-left '#[fg=green](#[default]#S#[fg=green])(#[default]#(whoami)@#H#[fg=green])#[default]'
-set -g status-right-length 30
-set -g status-right '#[fg=green](#[default]%d.%m#[fg=green])(#[default]##%V#[fg=green])(#[default]%H:%M#[fg=green])#[default]'
-set -g status-justify centre # center align window list
 
 # Start window indexing at one instead of zero
 set -g base-index 1
 
 # mouse off to keep usual features like scrolling in less, copy and paste
 set -g mouse off
+
+# vim: ft=tmux tw=0
