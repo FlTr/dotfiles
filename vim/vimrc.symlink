@@ -69,41 +69,27 @@ endif
 " }}}
 
 " Plugins {{{
-filetype off
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'tpope/vim-fugitive'
 
-Plugin 'gmarik/Vundle.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-Plugin 'bling/vim-airline'
+Plug 'easymotion/vim-easymotion'
+  let g:EasyMotion_smartcase = 1
+
+Plug 'moll/vim-bbye'
+
+Plug 'dyng/ctrlsf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+Plug 'bling/vim-airline'
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
-Plugin 'vim-airline/vim-airline-themes'
-  let g:airline_theme = "badwolf"
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-Plugin 'tpope/vim-fugitive'
-Plugin 'easymotion/vim-easymotion'
-  let g:EasyMotion_smartcase = 1
-Plugin 'sjl/badwolf'
-Plugin 'moll/vim-bbye'
-Plugin 'fatih/vim-go'
-Plugin 'SirVer/ultisnips'
-  let g:UltiSnipsExpandTrigger="<c-h>"
-  let g:UltiSnipsJumpForwardTrigger="<c-j>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-Plugin 'honza/vim-snippets'
-Plugin 'dyng/ctrlsf.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
-if has("python") && $MSYSTEM == ""
-  Plugin 'Valloric/YouCompleteMe'
-    let g:ycm_autoclose_preview_window_after_completion = 1
-endif
-
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 " }}}
 
 " Key bindings {{{
@@ -146,10 +132,6 @@ nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
 
 " Reflow paragrah
 nnoremap <leader>r gqip
-
-if has("win32")
-  map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
-endif
 " }}}
 
 " Filetype settings {{{
@@ -264,19 +246,10 @@ augroup END
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme badwolf
+colorscheme dracula
 
-hi StatusLine    gui=NONE guifg=#f8f6f2 guibg=#242321 cterm=NONE ctermfg=15  ctermbg=235
-hi WildMenu      gui=NONE guifg=#f8f6f2 guibg=#0a9dff cterm=NONE ctermfg=15  ctermbg=39
-hi MatchParen    gui=bold guifg=#ff2c4b guibg=NONE    cterm=bold ctermfg=196 ctermbg=NONE
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-  set guioptions=
-  set t_Co=256
-  set guitablabel=%M\ %t
-  set guifont=DejaVu_Sans_Mono_for_Powerline:h8.5:cANSI
-endif
+set guioptions=
+set guifont=SauceCodePro\ NF:h10
 " }}}
 
 " Tmux integration {{{
