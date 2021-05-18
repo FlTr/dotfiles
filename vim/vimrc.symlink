@@ -250,7 +250,7 @@ set background=dark
 colorscheme dracula
 
 set guioptions=
-set guifont=SauceCodePro\ NF:h10
+silent! set guifont=SauceCodePro\ NF:h10
 " }}}
 
 " Tmux integration {{{
