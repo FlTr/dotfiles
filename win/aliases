@@ -1,4 +1,5 @@
 bash=%GIT_INSTALL_ROOT%\usr\bin\bash --login
 clear=cls
 dot=pushd %DOT%
+h=pushd %USERPROFILE%\$1
 pwd=cd
