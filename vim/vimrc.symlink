@@ -63,6 +63,8 @@ set listchars=tab:»\ ,trail:·
 set spelllang=en_us
 set spellfile=~/.vim/spell/en.utf-8.add
 
+set clipboard=unnamedplus
+
 if has("win32")
   language us
 endif
