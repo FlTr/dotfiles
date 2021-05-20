@@ -2,7 +2,9 @@
 bat
 clink
 coreutils
+delta
 fd
+less
 lf
 lua
 neovim
