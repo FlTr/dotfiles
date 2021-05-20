@@ -3,3 +3,5 @@ clear=cls
 dot=pushd %DOT%
 h=pushd %USERPROFILE%\$1
 pwd=cd
+zf=z -I $*
+zb=z -b -I $*
