@@ -51,6 +51,10 @@ if not exist %LOCALAPPDATA%\clink\z.lua (
   echo mklink %LOCALAPPDATA%\clink\z.lua %Z_LUA% >> %SUDOBAT%
 )
 
+if not exist %LOCALAPPDATA%\clink\.inputrc (
+  echo mklink %LOCALAPPDATA%\clink\.inputrc %CD%\clink\inputrc >> %SUDOBAT%
+)
+
 call sudo cmd /c %SUDOBAT%
 del %SUDOBAT%
 popd

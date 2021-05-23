@@ -34,7 +34,7 @@ local function set_prompt_filter()
     -- build our own prompt
     -- orig: $E[1;32;40m$P$S{git}{hg}$S$_$E[1;30;40m{lamb}$S$E[0m
     -- color codes: "\x1b[1;37;40m"
-    local cmder_prompt = "\x1b[1;34m{cwd} {git} \n\x1b[0m{lamb} \x1b[0m"
+    local cmder_prompt = "\x1b[1;34m{cwd} {git}\x1b[0m \n{lamb} \x1b[0m"
     local lambda = "λ"
     cmder_prompt = string.gsub(cmder_prompt, "{cwd}", verbatim(cwd))
 
