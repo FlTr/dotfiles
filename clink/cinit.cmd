@@ -8,7 +8,7 @@ call clink inject --quiet
 doskey /macrofile=%DOT%\clink\aliases
 
 :: Setup PATH
-for /F %%p in ('scoop prefix python') do set PATH=%PATH%;%%p\Scripts
+if exist %USERPROFILE%\bin\ set PATH=%USERPROFILE%\bin;%PATH%
 for /F %%p in ('scoop prefix z.lua') do set PATH=%PATH%;%%p
 
 :: ENV
