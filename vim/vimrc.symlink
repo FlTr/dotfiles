@@ -74,6 +74,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -146,6 +147,7 @@ augroup ft_c_cpp
   au FileType c,cpp
         \   setl foldmethod=syntax
         \ | setl shiftwidth=4
+        \ | setl foldlevel=99
 augroup END
 
 " }}}
@@ -346,4 +348,4 @@ if $ConEmuBuild != ''
 endif
 " }}}
 
-" vim:set et sw=2 foldmethod=marker:
+" vim:set et sw=2 foldmethod=marker foldlevel=0:
