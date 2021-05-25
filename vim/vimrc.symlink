@@ -169,6 +169,15 @@ augroup ft_python
 augroup END
 
 " }}}
+" Lua {{{
+
+augroup ft_lua
+  au!
+  au FileType lua
+        \   setl shiftwidth=4
+augroup END
+
+"  }}}
 " Git commit {{{
 
 augroup ft_gitcommit
