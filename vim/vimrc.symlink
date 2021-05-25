@@ -131,6 +131,14 @@ inoremap <m-h> <esc><c-w>h
 inoremap <m-j> <esc><c-w>j
 inoremap <m-k> <esc><c-w>k
 inoremap <m-l> <esc><c-w>l
+if has('nvim')
+  tnoremap jk <C-\><C-n>
+  tnoremap kj <C-\><C-n>
+  tnoremap <m-h> <C-\><C-n><c-w>h
+  tnoremap <m-j> <C-\><C-n><c-w>j
+  tnoremap <m-k> <C-\><C-n><c-w>k
+  tnoremap <m-l> <C-\><C-n><c-w>l
+endif
 
 " Trim trailing whitespace w/o affecting the search pattern register.
 nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
