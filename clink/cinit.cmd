@@ -9,6 +9,7 @@ doskey /macrofile=%DOT%\clink\aliases
 
 :: Setup PATH
 if exist %USERPROFILE%\bin\ set PATH=%USERPROFILE%\bin;%PATH%
+set PATH=%DOT%\win\bin;%PATH%
 for /F %%p in ('scoop prefix z.lua') do set PATH=%PATH%;%%p
 
 :: ENV

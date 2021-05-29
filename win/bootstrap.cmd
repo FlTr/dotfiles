@@ -55,6 +55,8 @@ if not exist %LOCALAPPDATA%\clink\.inputrc (
   echo mklink %LOCALAPPDATA%\clink\.inputrc %CD%\clink\inputrc >> %SUDOBAT%
 )
 
+echo mklink "%LOCALAPPDATA%\Microsoft\Windows Terminal\settings.json" %CD%\win\wt-settings.json >> %SUDOBAT%
+
 call sudo cmd /c %SUDOBAT%
 del %SUDOBAT%
 popd
