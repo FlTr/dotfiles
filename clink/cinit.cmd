@@ -4,7 +4,9 @@
 call clink inject --quiet
 
 :: Setup aliases
-"%GIT_INSTALL_ROOT%\usr\bin\bash" --login %DOT%\clink\collect-aliases.sh
+if not exist %DOT%\clink\aliases (
+  "%GIT_INSTALL_ROOT%\usr\bin\bash" --login %DOT%\clink\collect-aliases.sh
+)
 doskey /macrofile=%DOT%\clink\aliases
 
 :: Setup PATH
