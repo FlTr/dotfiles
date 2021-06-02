@@ -3,5 +3,6 @@ clear=cls
 dot=pushd %DOT%
 h=pushd %USERPROFILE%\$1
 pwd=cd
+refreshenv=%DOT%\win\bin\RefreshEnv.cmd $T %DOT%\clink\cinit.cmd --path-only
 zf=z -I $*
 zb=z -b -I $*
