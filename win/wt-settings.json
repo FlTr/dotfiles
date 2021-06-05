@@ -3,11 +3,11 @@
     // Add custom actions and keybindings to this array.
     // To unbind a key combination from your defaults.json, set the command to "unbound".
     // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
-    "actions":
+    "actions": 
     [
         // Tab Management
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 0
@@ -15,7 +15,7 @@
             "keys": "alt+1"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 1
@@ -23,7 +23,7 @@
             "keys": "alt+2"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 2
@@ -31,7 +31,7 @@
             "keys": "alt+3"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 3
@@ -39,7 +39,7 @@
             "keys": "alt+4"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 4
@@ -47,7 +47,7 @@
             "keys": "alt+5"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 5
@@ -55,7 +55,7 @@
             "keys": "alt+6"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 6
@@ -63,7 +63,7 @@
             "keys": "alt+7"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 7
@@ -71,7 +71,7 @@
             "keys": "alt+8"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "switchToTab",
                 "index": 8
@@ -80,7 +80,7 @@
         },
         // Pane Management
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "down"
@@ -88,7 +88,7 @@
             "keys": "alt+j"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -96,7 +96,7 @@
             "keys": "alt+h"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -104,7 +104,7 @@
             "keys": "alt+l"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -121,7 +121,7 @@
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -133,10 +133,10 @@
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-    "profiles":
+    "profiles": 
     {
         "defaults": {},
-        "list":
+        "list": 
         [
             {
                 "commandline": "powershell.exe",
@@ -167,8 +167,12 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "bellStyle": "none",
+                "closeOnExit": "always",
                 "colorScheme": "Dracula",
-                "commandline": "D:\\tools\\msys\\usr\\bin\\zsh.exe",
+                "commandline": "D:\\tools\\msys\\usr\\bin\\env.exe MSYSTEM=MINGW64 /usr/bin/zsh --login",
+                "cursorShape": "bar",
+                "fontFace": "SauceCodePro NF",
                 "fontSize": 10,
                 "name": "msys",
                 "padding": "24",
@@ -177,7 +181,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
