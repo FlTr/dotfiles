@@ -117,6 +117,7 @@ map s <Plug>(easymotion-s)
 nnoremap <space> za
 
 nnoremap <silent> <leader><space> :nohlsearch<cr>
+nnoremap <C-l> :GitGutter<cr><C-l>
 
 " buffer
 nnoremap <silent> L :bn<cr>
