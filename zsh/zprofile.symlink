@@ -1,9 +1,0 @@
-# ~/.zprofile
-
-emulate sh
-if [ -f "$HOME/.profile" ] ; then
-    . $HOME/.profile
-fi
-emulate zsh
-
-# vim: ft=sh
