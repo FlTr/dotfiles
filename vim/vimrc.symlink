@@ -1,4 +1,370 @@
-syntax on
+" Options {{{
+if has("win32")
+  let &runtimepath = substitute(&runtimepath,'\v(Documents and Settings|Users)[\/][^\/,]*[\/]\zsvimfiles','.vim','g')
+endif
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+set nocompatible
+set encoding=utf8
+set fileformats=unix,dos,mac
+set nrformats-=octal
+
+set expandtab
+set softtabstop=-1 " sts = shiftwidth
+set shiftwidth=2
+set tabstop=8
+set textwidth=80
+set colorcolumn=+1
+set cursorline
+
+set history=200
+set smarttab
+set linebreak
+set autoindent
+set smartindent
+set wrap
+set modeline
+set noshowmode
+set nobackup
+set nowritebackup
+set noswapfile
+set autoread
+set autowrite
+set hidden
+
+set mouse=a
+set scrolloff=7
+set wildmode=longest:full,full
+set wildmenu
+set ruler
+set cmdheight=1
+set laststatus=2
+set backspace=eol,start,indent
+set whichwrap+=<,>
+set wildignore+=*.o,*.so,*.dll,*.exe,*.bak,*.swp,*.class,*.pyc,*.pyd,*.pyo,*~
+set wildignore+=*.zip,*.tgz,*.gz,*.bz2,*.lz,*.rar,*.7z,*.jar,*.pdf,*.mat,*.ppt
+set wildignore+=*.aux,*.bbl,*.bcf,*.blg,*.fdb_latexmk,*.fls,*.out,*.toc " LaTeX
+
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set lazyredraw
+set magic
+set showmatch
+set matchtime=2
+
+set noerrorbells
+set novisualbell
+set timeoutlen=500
+
+set list
+set listchars=tab:»\ ,trail:·
+
+set spelllang=en_us
+set spellfile=~/.vim/spell/en.utf-8.add
+
+set clipboard=unnamedplus
+
+if has("win32")
+  language us
+endif
+" }}}
+
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+Plug 'easymotion/vim-easymotion'
+  let g:EasyMotion_smartcase = 1
+
+Plug 'moll/vim-bbye'
+
+Plug 'dyng/ctrlsf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+Plug 'bling/vim-airline'
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+Plug 'dracula/vim', { 'as': 'dracula' }
+  let g:dracula_colorterm = 0
+
+call plug#end()
+" }}}
+
+" Key bindings {{{
+let mapleader = ","
+
+inoremap kj <esc>
+inoremap jk <esc>
+
+nnoremap <leader>ev :e $MYVIMRC<cr>
+nnoremap <leader>sv :so $MYVIMRC<cr>
+nnoremap <leader>cd :cd %:h<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>tt :NERDTreeToggle<cr>
+
+map <leader>b <esc>:CtrlPBuffer<cr>
+map <leader>g <Plug>CtrlSFPrompt
+vmap <leader>g <Plug>CtrlSFVwordPath
+map s <Plug>(easymotion-s)
+
+nnoremap <space> za
+
+nnoremap <silent> <leader><space> :nohlsearch<cr>
+nnoremap <C-l> :GitGutter<cr><C-l>
+
+" buffer
+nnoremap <silent> L :bn<cr>
+nnoremap <silent> H :bp<cr>
+nnoremap <silent> <leader>d :Bd<cr>
+
+" window navigation
+nnoremap <m-h> <c-w>h
+nnoremap <m-j> <c-w>j
+nnoremap <m-k> <c-w>k
+nnoremap <m-l> <c-w>l
+inoremap <m-h> <esc><c-w>h
+inoremap <m-j> <esc><c-w>j
+inoremap <m-k> <esc><c-w>k
+inoremap <m-l> <esc><c-w>l
+if has('nvim')
+  tnoremap jk <C-\><C-n>
+  tnoremap kj <C-\><C-n>
+  tnoremap <m-h> <C-\><C-n><c-w>h
+  tnoremap <m-j> <C-\><C-n><c-w>j
+  tnoremap <m-k> <C-\><C-n><c-w>k
+  tnoremap <m-l> <C-\><C-n><c-w>l
+endif
+
+" Trim trailing whitespace w/o affecting the search pattern register.
+nnoremap <silent> <F12> :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
+
+" Reflow paragrah
+nnoremap <leader>r gqip
+" }}}
+
+" Filetype settings {{{
+" C/C++ {{{
+
+augroup ft_c_cpp
+  au!
+  au FileType c,cpp
+        \   setl foldmethod=syntax
+        \ | setl shiftwidth=4
+        \ | setl foldlevel=99
+augroup END
+
+" }}}
+" Python {{{
+
+augroup ft_python
+  au!
+  au FileType python
+        \   setl textwidth=79
+        \ | setl shiftwidth=4
+augroup END
+
+" }}}
+" Lua {{{
+
+augroup ft_lua
+  au!
+  au FileType lua
+        \   setl shiftwidth=4
+augroup END
+
+"  }}}
+" Git commit {{{
+
+augroup ft_gitcommit
+  au!
+  au FileType gitcommit
+        \   setl spell
+        \ | setl colorcolumn=51,73
+augroup END
+
+" }}}
+" Matlab {{{
+
+augroup ft_matlab
+  au!
+  au FileType matlab
+        \   setl shiftwidth=4
+augroup END
+
+" }}}
+" Go {{{
+
+augroup ft_go
+  au!
+  au FileType go
+        \   setl textwidth=0
+        \ | setl noexpandtab
+        \ | setl tabstop=4
+        \ | setl shiftwidth=4
+        \ | nmap <buffer> <leader>m <Plug>(go-run)
+augroup END
+
+" }}}
+" Tex {{{
+
+let g:tex_flavor = 'latex'
+
+augroup ft_tex
+  au!
+  au FileType tex
+        \   setl cpoptions+=J
+        \ | setl spell
+        \ | set wildignore+=*.log,*.run.xml
+        \ | nnoremap <buffer> <leader>m :make<cr>
+augroup END
+
+" }}}
+" XML {{{
+
+let g:xml_syntax_folding=1
+
+augroup ft_xml
+  au!
+  au FileType xml
+        \   setl foldmethod=syntax
+augroup END
+
+" }}}
+" Help {{{
+
+augroup ft_help
+  au!
+  au FileType help
+        \   nnoremap <buffer> q :q<cr>
+augroup END
+
+" }}}
+" Nerdtree {{{
+
+augroup ft_nerd
+  au!
+  au FileType nerdtree
+        \   nmap <buffer> <space> o
+augroup END
+
+" }}}
+" Quickfix {{{
+
+augroup ft_qf
+  au!
+  au FileType qf
+        \   nmap <buffer> q :q<cr>
+        \ | nmap <buffer> o <cr>
+augroup END
+
+" }}}
+" }}}
+
+" Colors and Fonts {{{
+syntax enable
+set t_Co=256
+set background=dark
+colorscheme dracula
+
+set guioptions=
+silent! set guifont=SauceCodePro\ NF:h10
+" }}}
+
+" Tmux integration {{{
+if $TMUX != ''
+  " https://gist.github.com/tarruda/5158535
+  " integrate movement between tmux/vim panes/windows
+
+  function! TmuxMove(direction)
+    " Check if we are currently focusing on a edge window.
+    " To achieve that, move to/from the requested window and
+    " see if the window number changed
+    let oldw = winnr()
+    silent! exe 'wincmd ' . a:direction
+    let neww = winnr()
+    silent! exe oldw . 'wincmd'
+    if oldw == neww
+      " The focused window is at an edge, so ask tmux to switch panes
+      if a:direction == 'j'
+        call system("tmux select-pane -D")
+      elseif a:direction == 'k'
+        call system("tmux select-pane -U")
+      elseif a:direction == 'h'
+        call system("tmux select-pane -L")
+      elseif a:direction == 'l'
+        call system("tmux select-pane -R")
+      endif
+    else
+      exe 'wincmd ' . a:direction
+    end
+  endfun
+
+
+  function! TmuxSharedYank()
+    " Send the contents of the 't' register to a temporary file, invoke
+    " copy to tmux using load-buffer, and then to xclip
+    " FIXME for some reason, the 'tmux load-buffer -' form will hang
+    " when used with 'system()' which takes a second argument as stdin.
+    let tmpfile = tempname()
+    call writefile(split(@t, '\n'), tmpfile, 'b')
+    call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | clip-copy')
+    call delete(tmpfile)
+  endfunction
+
+
+  function! TmuxSharedPaste()
+    " put tmux copy buffer into the t register, the mapping will handle
+    " pasting into the buffer
+    let @t = system('clip-paste | tmux load-buffer -;tmux show-buffer')
+  endfunction
+
+
+  nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w>l :silent call TmuxMove('l')<cr>
+  nnoremap <silent> <c-w><down> :silent call TmuxMove('j')<cr>
+  nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
+  nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
+  nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
+
+  if has("nvim")
+    vnoremap <silent> <m-y> "ty:call TmuxSharedYank()<cr>
+    vnoremap <silent> <m-d> "td:call TmuxSharedYank()<cr>
+    nnoremap <silent> <m-p> :call TmuxSharedPaste()<cr>"tp
+    vnoremap <silent> <m-p> d:call TmuxSharedPaste()<cr>h"tp
+  else
+    vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
+    vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
+    nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
+    vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
+  endif
+
+  set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
+
+endif
+" }}}
+
+" ConEmu {{{
+if $ConEmuBuild != ''
+  set termencoding=utf8
+  set term=xterm
+  set t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+
+  nnoremap <esc>h <c-w>h
+  nnoremap <esc>j <c-w>j
+  nnoremap <esc>k <c-w>k
+  nnoremap <esc>l <c-w>l
+endif
+" }}}
+
+" vim:set et sw=2 foldmethod=marker foldlevel=0:

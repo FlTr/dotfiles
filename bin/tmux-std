@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SESSION="std"
+tmux has-session -t $SESSION > /dev/null 2>&1 || {
+    tmux new-session -d -s $SESSION
+
+    tmux new-window -t $SESSION:2
+    tmux split-window -h -t $SESSION:2
+    tmux select-pane -t $SESSION:2.0
+
+    tmux select-window -t $SESSION:1
+    tmux split-window -h -t $SESSION:1
+    tmux split-window -v -t $SESSION:1.1
+    #tmux split-window -v -l 5 -t $SESSION:1.0
+    tmux select-pane -t $SESSION:1.0
+}
+
+# hide border if using i3
+which i3-msg > /dev/null 2>&1 && i3-msg border none
+
+tmux attach -t $SESSION

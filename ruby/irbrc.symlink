@@ -1,14 +1,28 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
+
 require 'irb/completion'
 require 'irb/ext/save-history'
-require 'rubygems'
+require 'pp'
 
 IRB.conf[:SAVE_HISTORY] = 1000
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-history"
 
-IRB.conf[:PROMPT_MODE] = :SIMPLE
+begin
+  _prompt_prefix = "#{`rbenv version-name`.strip}:"
+rescue Errno::ENOENT
+  _prompt_prefix = ''
+end
 
-IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:PROMPT][:MYPROMPT] = {
+  :PROMPT_I => "#{_prompt_prefix}> ",
+  :PROMPT_S => "#{_prompt_prefix}%l> ",
+  :PROMPT_C => "#{_prompt_prefix}> ",
+  :PROMPT_N => "#{_prompt_prefix}?> ",
+  :RETURN => "=> %s\n",
+  :AUTO_INDENT => true
+}
+IRB.conf[:PROMPT_MODE] = :MYPROMPT
+
 
 class Object
   # list methods which aren't in superclass
@@ -29,20 +43,4 @@ class Object
     end
     puts `ri '#{method}'`
   end
-end
-
-# Copies the result of the last operation you ran in IRB to the system
-# clipboard (if you're on macOS).
-def cop
-  last_value = IRB.CurrentContext.last_value
-  %x[echo '#{last_value}' | pbcopy]
-  "copied \`#{last_value}' to your clipboard"
-end
-
-def me
-  User.find_by_login(ENV['USER'].strip)
-end
-
-def r
-  reload!
 end

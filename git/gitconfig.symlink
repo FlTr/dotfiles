@@ -3,6 +3,9 @@
         path = ~/.gitconfig.local
 [hub]
         protocol = https
+[user]
+        name = AUTHORNAME
+        email = AUTHOREMAIL
 [alias]
         co = checkout
         promote = !$ZSH/bin/git-promote
@@ -17,6 +20,8 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+        # 1 tab = 4 spaces when diffing
+        pager = less -x1,5
 [apply]
         whitespace = nowarn
 [mergetool]

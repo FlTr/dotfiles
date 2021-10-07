@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [ "$(uname -s)" = "Darwin" ] ; then
+  pbpaste
+else
+  xclip -o -selection clipboard
+fi

@@ -3,22 +3,26 @@
 # bootstrap installs things.
 
 cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd -P)
+DOTFILES_ROOT="`pwd`"
 
 set -e
 
 echo ''
 
 info () {
-  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+  printf "  [ \033[00;34m .. \033[0m ] $1"
 }
 
 user () {
-  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+  printf "\r  [ \033[0;33m ?  \033[0m ] $1 "
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32m OK \033[0m ] $1\n"
+}
+
+skip () {
+  printf "\r\033[2K  [ \033[00;33mSKIP\033[0m ] $1\n"
 }
 
 fail () {
@@ -28,51 +32,65 @@ fail () {
 }
 
 setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
+  if ! [ -f git/gitconfig.symlink ]
   then
     info 'setup gitconfig'
-
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-    fi
 
     user ' - What is your github author name?'
     read -e git_authorname
     user ' - What is your github author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+    git_authorname=${git_authorname/\//\\\/}
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" git/gitconfig.symlink.example > git/gitconfig.symlink
 
     success 'gitconfig'
   fi
 }
 
-
 link_file () {
-  local src=$1 dst=$2
-
-  local overwrite= backup= skip=
-  local action=
-
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+  if [ ! -z "$MSYSTEM" ]
   then
+    tgt=`cygpath -w $1`
+    lnk=`cygpath -w $2`
+    if [ -d "$1" ]
+    then
+      cmd /c "mklink /D $lnk $tgt" > /dev/null
+    else
+      cmd /c "mklink $lnk $tgt" > /dev/null
+    fi
+  else
+    ln -s $1 $2
+  fi
+  success "linked $1 to $2"
+}
 
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+install_dotfiles () {
+  info 'installing dotfiles'
+
+  overwrite_all=false
+  backup_all=false
+  skip_all=false
+
+  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink -o -name \*.cfglink`
+  do
+    if [[ "$source" == *".symlink" ]]
+    then
+      dest="$HOME/.`basename \"${source%.*}\"`"
+    else
+      dest="$HOME/.config/`basename \"${source%.*}\"`"
+    fi
+
+    if [ -f $dest ] || [ -d $dest ]
     then
 
-      local currentSrc="$(readlink $dst)"
+      overwrite=false
+      backup=false
+      skip=false
 
-      if [ "$currentSrc" == "$src" ]
+      if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
       then
-
-        skip=true;
-
-      else
-
-        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
-        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        user "File already exists: `basename $source`, what do you want to do?\n  - [s]kip\n  - [S]kip all\n  - [o]verwrite\n  - [O]verwrite all\n  - [b]ackup\n  - [B]ackup all\n"
         read -n 1 action
 
         case "$action" in
@@ -91,66 +109,52 @@ link_file () {
           * )
             ;;
         esac
-
       fi
 
+      if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
+      then
+        rm -rf $dest
+        success "removed $dest"
+      fi
+
+      if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
+      then
+        mv $dest $dest\.backup
+        success "moved $dest to $dest.backup"
+      fi
+
+      if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
+      then
+        link_file $source $dest
+      else
+        skip "$source"
+      fi
+
+    else
+      link_file $source $dest
     fi
 
-    overwrite=${overwrite:-$overwrite_all}
-    backup=${backup:-$backup_all}
-    skip=${skip:-$skip_all}
-
-    if [ "$overwrite" == "true" ]
-    then
-      rm -rf "$dst"
-      success "removed $dst"
-    fi
-
-    if [ "$backup" == "true" ]
-    then
-      mv "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
-    fi
-
-    if [ "$skip" == "true" ]
-    then
-      success "skipped $src"
-    fi
-  fi
-
-  if [ "$skip" != "true" ]  # "false" or empty
-  then
-    ln -s "$1" "$2"
-    success "linked $1 to $2"
-  fi
-}
-
-install_dotfiles () {
-  info 'installing dotfiles'
-
-  local overwrite_all=false backup_all=false skip_all=false
-
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
   done
 }
 
+check_permissions () {
+  # 'net file' needs administrator permissions.
+  admin=false
+  net file > /dev/null 2>&1 && admin=true
+  if [ "$admin" == "false" ]
+  then
+    fail "Administrator permissions required."
+  fi
+}
+
+# If we are on windows, we need administrator permissions for symlinking.
+if [ ! -z "$MSYSTEM" ]
+then
+  check_permissions
+fi
+
 setup_gitconfig
 install_dotfiles
-
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
 
 echo ''
 echo '  All installed!'

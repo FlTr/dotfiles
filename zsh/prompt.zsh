@@ -2,76 +2,74 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
-if (( $+commands[git] ))
-then
+# cheers, @bliker
+# https://github.com/bliker/cmder/blob/master/config/git.lua
+
+if (( $+commands[git] )) ; then
   git="$commands[git]"
 else
   git="/usr/bin/git"
 fi
 
-git_branch() {
-  echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
-}
-
-git_dirty() {
-  if $(! $git status -s &> /dev/null)
-  then
-    echo ""
+git_color () {
+  if $git diff --quiet --ignore-submodules HEAD 2>&1 ; then
+    echo "%{$fg[green]%}$1%{$reset_color%}"
   else
-    if [[ $($git status --porcelain) == "" ]]
-    then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-    else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-    fi
+    echo "%{$fg[red]%}$1%{$reset_color%}"
   fi
 }
 
-git_prompt_info () {
- ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
- echo "${ref#refs/heads/}"
-}
-
-# This assumes that you always have an origin named `origin`, and that you only
-# care about one specific origin. If this is not the case, you might want to use
-# `$git cherry -v @{upstream}` instead.
-need_push () {
-  if [ $($git rev-parse --is-inside-work-tree 2>/dev/null) ]
-  then
-    number=$($git cherry -v origin/$(git symbolic-ref --short HEAD) 2>/dev/null | wc -l | bc)
-
-    if [[ $number == 0 ]]
-    then
-      echo " "
-    else
-      echo " with %{$fg_bold[magenta]%}$number unpushed%{$reset_color%}"
-    fi
+git_untracked () {
+  if $git status --porcelain | grep -q '^??' ; then
+    echo "%{$fg[magenta]%}?%{$reset_color%}"
   fi
 }
 
-directory_name() {
-  echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
-}
-
-battery_status() {
-  if test ! "$(uname)" = "Darwin"
-  then
-    exit 0
-  fi
-
-  if [[ $(sysctl -n hw.model) == *"Book"* ]]
-  then
-    $ZSH/bin/battery-status
+git_need_push () {
+  if [[ $($git cherry -v @{upstream} 2>/dev/null) != "" ]] ; then
+    echo "%{$fg[magenta]%}^%{$reset_color%}"
   fi
 }
 
-export PROMPT=$'\n$(battery_status)in $(directory_name) $(git_dirty)$(need_push)\n› '
-set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
+git_prompt () {
+  local ref
+  [ -n "$NO_GIT_PROMPT" ] && return
+
+  ref=$($git symbolic-ref HEAD 2>/dev/null) || return
+
+  ref="${ref#refs/heads/}"
+  echo "[$(git_need_push)$(git_color $ref)$(git_untracked)]"
 }
 
-precmd() {
-  title "zsh" "%m" "%55<...<%~"
-  set_prompt
+directory_name () {
+  echo "%{$fg[cyan]%}%3~%{$reset_color%}"
 }
+
+prompt_prefix () {
+  local prefix
+  prefix=""
+
+  if [[ "$SSH_CONNECTION" != "" ]] ; then
+    prefix="(@%{$fg[yellow]%}%m%{$reset_color%}) "
+  fi
+
+  prefix=$prefix"%{$fg[green]%}~>%{$reset_color%}"
+  echo $prefix
+}
+
+export PROMPT=$'$(prompt_prefix) $(directory_name) › '
+export RPROMPT='$(git_prompt)'
+if (( $+commands[rbenv] )) ; then
+  export RPROMPT=$RPROMPT'(%{$fg[yellow]%}$(rbenv version-name)%{$reset_color%})'
+fi
+
+precmd () {
+  # set title if not in tmux
+  [ -n "$TMUX" ] || title "zsh" "$USER@%m" "%55<...<%~"
+}
+
+preexec () {
+  [ -n "$TMUX" ] || title "$1" "$USER@%m" "%35<...<%~"
+}
+
+# vim: et:sw=2:sts=2
