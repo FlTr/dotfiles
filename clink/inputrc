@@ -1,18 +1,18 @@
 set colored-stats on
 
-set editing-mode vi
-set show-mode-in-prompt on
-set vi-cmd-mode-string \1\e[3 q\2\1\e[34m\2
-set vi-ins-mode-string \1\e[5 q\2\1\e[0m\2
+# set editing-mode vi
+# set show-mode-in-prompt on
+# set vi-cmd-mode-string \1\e[3 q\2\1\e[34m\2
+# set vi-ins-mode-string \1\e[5 q\2\1\e[0m\2
 
-$if mode=vi
+#$if mode=vi
 
-set keymap vi-command
-M-p: clink-paste
+# set keymap vi-command
+# M-p: clink-paste
 
-set keymap vi-insert
-C-c: clink-ctrl-c
-C-l: clear-screen
-M-p: clink-paste
+# set keymap vi-insert
+# C-c: clink-ctrl-c
+# C-l: clear-screen
+# M-p: clink-paste
 
-$endif
+# $endif

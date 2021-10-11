@@ -1,0 +1,14 @@
+uah_color = false
+cwd_color = ""
+lamb_color = false
+clean_color = false
+dirty_color = false
+conflict_color = false
+unknown_color = false
+prompt_homeSymbol = "~"
+prompt_lambSymbol = ">"
+prompt_type = "full"
+prompt_useHomeSymbol = false
+prompt_useUserAtHost = false
+prompt_singleLine = false
+prompt_includeVersionControl = true

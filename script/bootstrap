@@ -72,7 +72,7 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink -o -name \*.cfglink`
+  for source in `find $DOT -maxdepth 2 -name \*.symlink -o -name \*.cfglink`
   do
     if [[ "$source" == *".symlink" ]]
     then

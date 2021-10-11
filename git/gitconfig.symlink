@@ -3,14 +3,9 @@
         path = ~/.gitconfig.local
 [hub]
         protocol = https
-[user]
-        name = AUTHORNAME
-        email = AUTHOREMAIL
 [alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
+        wtf     = !$DOT/bin/git-wtf
+        rank-contributors = !$DOT/bin/git-rank-contributors
         count   = !git shortlog -sn
 [color]
         diff = auto
@@ -20,8 +15,6 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
-        # 1 tab = 4 spaces when diffing
-        pager = less -x1,5
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -36,5 +29,3 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
-[credential]
-	helper = osxkeychain
