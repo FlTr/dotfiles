@@ -13,6 +13,9 @@ if not exist git\gitconfig.symlink (
   goto :eof
 )
 
+call clink installscripts %DOT%\clink
+call clink installscripts %DOT%\clink\completions
+
 if [%1] EQU [--skip-scoop] goto skip_scoop
 
 where scoop >nul 2>nul
@@ -36,6 +39,12 @@ if not exist %USERPROFILE%\.gitconfig (
 
 if not exist %LOCALAPPDATA%\clink\.inputrc (
   echo mklink %LOCALAPPDATA%\clink\.inputrc %CD%\clink\inputrc >> %SUDOBAT%
+)
+
+if not exist %DOT%\clink\z.lua (
+  for /F %%p in ('scoop prefix z.lua') do (
+    echo mklink %LOCALAPPDATA%\clink\z.lua %%p\z.lua >> %SUDOBAT%
+  )
 )
 
 call sudo cmd /c %SUDOBAT%
