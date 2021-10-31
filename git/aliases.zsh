@@ -1,4 +1,5 @@
 alias g=git
+alias gf='git fetch --prune'
 alias ga='git add'
 alias gl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%C(red)%h%C(reset) %s %C(cyan)@%an%C(reset)%C(yellow)%d %C(reset)%C(green)(%cr)%C(reset)' --abbrev-commit --date=relative"
