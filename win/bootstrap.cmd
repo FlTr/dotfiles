@@ -47,6 +47,10 @@ if not exist %DOT%\clink\z.lua (
   )
 )
 
+if exist %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe (
+  echo cp %DOT%\win\wt-settings.json %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json >> %SUDOBAT%
+)
+
 call sudo cmd /c %SUDOBAT%
 del %SUDOBAT%
 popd
