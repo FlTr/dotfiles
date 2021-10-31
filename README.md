@@ -47,9 +47,9 @@ There's a few special files in the hierarchy.
 Run this:
 
 ```sh
-git clone https://github.com/fltr/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-script/bootstrap
+git clone https://github.com/fltr/dotfiles.git %HOMEPROFILE%/.dotfiles
+cd %HOMEPROFILE%/.dotfiles
+win\\bootstrap
 ```
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
