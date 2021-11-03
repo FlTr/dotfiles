@@ -41,7 +41,7 @@ if not exist %LOCALAPPDATA%\clink\.inputrc (
   echo mklink %LOCALAPPDATA%\clink\.inputrc %CD%\clink\inputrc >> %SUDOBAT%
 )
 
-if not exist %DOT%\clink\z.lua (
+if not exist %LOCALAPPDATA%\clink\z.lua (
   for /F %%p in ('scoop prefix z.lua') do (
     echo mklink %LOCALAPPDATA%\clink\z.lua %%p\z.lua >> %SUDOBAT%
   )
