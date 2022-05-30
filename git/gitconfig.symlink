@@ -4,9 +4,17 @@
 [hub]
         protocol = https
 [alias]
-        wtf     = !$DOT/bin/git-wtf
+        count = !git shortlog -sn
+        credit = !$DOT/bin/git-credit
+        delete-local-merged = !$DOT/bin/git-delete-local-merged
+        undo = !$DOT/bin/git-undo
+        unpushed = !$DOT/bin/git-unpushed
+        unpushed-stat = !$DOT/bin/git-unpushed-stat
+        up = !$DOT/bin/git-up
+        reup = !$DOT/bin/git-reup
+        wtf = !$DOT/bin/git-wtf
         rank-contributors = !$DOT/bin/git-rank-contributors
-        count   = !git shortlog -sn
+
 [color]
         diff = auto
         status = auto

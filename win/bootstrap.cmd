@@ -32,6 +32,9 @@ for /F %%a in (win\scooplist) do ( cmd /c scoop install %%a )
 set SUDOBAT=%TEMP%\sudo-bootstrap.bat
 echo. > %SUDOBAT%
 
+if not exist %CD%\bin\git-up (
+  echo mklink %CD%\bin\git-reup %CD%\bin\git-reup >> %SUDOBAT%
+)
 
 if not exist %USERPROFILE%\.gitconfig (
   echo mklink %USERPROFILE%\.gitconfig %CD%\git\gitconfig.symlink >> %SUDOBAT%
