@@ -15,6 +15,7 @@ if not exist git\gitconfig.symlink (
 
 call clink installscripts %DOT%\clink
 call clink installscripts %DOT%\clink\completions
+call clink installscripts %DOT%\clink\more-completions\src
 
 if [%1] EQU [--skip-scoop] goto skip_scoop
 
