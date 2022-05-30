@@ -12,9 +12,11 @@ alias gc='git commit -v'
 alias gca='git commit -av'
 alias gco='git checkout'
 alias gcb='git copy-branch-name'
+alias gclean='git clean'
 alias gb='git branch'
 alias gs='git status -sb'
 alias gsu='git submodule update'
+alias gsclean='git submodule foreach git clean'
 alias gbak='git push --mirror backup'
 
 # git-svn aliases
